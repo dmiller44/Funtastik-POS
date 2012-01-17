@@ -15,6 +15,7 @@ class InventoryItem {
     boolean archived = false
     ItemType itemType
     ItemSubType subType
+    Manufacturer manufacturer
     Color color
 
     static constraints = {
@@ -23,6 +24,7 @@ class InventoryItem {
         description(blank: true, nullable: true)
         itemType(nullable: false)
         subType(nullable: true)
+        manufacturer(nullable: false)
         color(nullable: false)
         wholesalePrice()
         retailPrice()
