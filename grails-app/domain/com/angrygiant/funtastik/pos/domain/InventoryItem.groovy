@@ -19,8 +19,8 @@ class InventoryItem {
     Color color
 
     static constraints = {
-        skuCode(blank: false, nullable: false)
-        name(blank: false, nullable: false)
+        skuCode(blank: false, nullable: false, unique: true)
+        name(blank: false, nullable: false, unique: true)
         description(blank: true, nullable: true)
         itemType(nullable: false)
         subType(nullable: true)

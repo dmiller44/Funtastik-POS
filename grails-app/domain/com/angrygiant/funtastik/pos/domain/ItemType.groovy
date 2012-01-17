@@ -8,7 +8,7 @@ class ItemType {
     boolean retired
 
     static constraints = {
-        name(blank: false, nullable: false)
+        name(blank: false, nullable: false, unique: true)
         retired()
     }
 

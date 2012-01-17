@@ -6,7 +6,7 @@ class Department {
     boolean retired = false
 
     static constraints = {
-        name(nullable: false, blank: false)
+        name(nullable: false, blank: false, unique: true)
         retired()
     }
 
