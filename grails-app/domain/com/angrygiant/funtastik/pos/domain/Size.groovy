@@ -9,4 +9,8 @@ class Size {
     static constraints = {
         name(blank: false, nullable: false)
     }
+
+    String toString() {
+        return name
+    }
 }

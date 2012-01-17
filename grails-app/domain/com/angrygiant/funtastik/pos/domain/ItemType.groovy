@@ -9,4 +9,8 @@ class ItemType {
         name(blank: false, nullable: false)
         retired()
     }
+
+    String toString() {
+        return name
+    }
 }

@@ -11,4 +11,8 @@ class ItemSubType {
         name(nullable: false, blank: false)
         retired()
     }
+
+    String toString() {
+        return name
+    }
 }

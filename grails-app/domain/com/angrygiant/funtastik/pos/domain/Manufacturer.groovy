@@ -13,4 +13,8 @@ class Manufacturer {
         webSite(blank: true, nullable: true)
         preferredVendor()
     }
+
+    String toString() {
+        return name
+    }
 }
