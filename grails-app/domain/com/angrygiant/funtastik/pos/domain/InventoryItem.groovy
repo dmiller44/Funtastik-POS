@@ -1,0 +1,34 @@
+package com.angrygiant.funtastik.pos.domain
+
+class InventoryItem {
+
+    static hasMany = [departments: Department]
+
+    String name
+    String description
+    int qoh = 0
+    double wholesalePrice
+    double retailPrice
+    boolean taxable = false
+    boolean barcoded = false
+    String skuCode
+    boolean archived = false
+    ItemType itemType
+    ItemSubType subType
+    Color color
+
+    static constraints = {
+        skuCode(blank: false, nullable: false)
+        name(blank: false, nullable: false)
+        description(blank: true, nullable: true)
+        itemType(nullable: false)
+        subType(nullable: true)
+        color(nullable: false)
+        wholesalePrice()
+        retailPrice()
+        qoh()
+        taxable()
+        barcoded()
+        archived()
+    }
+}
