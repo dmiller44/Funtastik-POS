@@ -263,4 +263,6 @@ databaseChangeLog = {
     changeSet(author: "dmiller (generated)", id: "1326834590250-23") {
         createSequence(sequenceName: "hibernate_sequence")
     }
+
+	include file: 'addSecurityDomains.groovy'
 }
