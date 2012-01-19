@@ -2,6 +2,9 @@ import com.angrygiant.funtastik.pos.domain.Color
 import com.angrygiant.funtastik.pos.domain.Department
 import com.angrygiant.funtastik.pos.domain.ItemType
 import com.angrygiant.funtastik.pos.domain.Size
+import com.angrygiant.funtastik.security.Users
+import com.angrygiant.funtastik.security.Role
+import com.angrygiant.funtastik.security.UserRole
 
 class DataInitializerBootStrap {
 
@@ -71,6 +74,26 @@ class DataInitializerBootStrap {
 
             log.info("Done adding initial sizes")
         }
+
+	//set up initial roles
+	if (Role.list()?.size() == 0) {
+	    log.warn("Creating initial roles for application")
+
+	    new Role(authority: 'ROLE_ADMIN').save(flush: true)
+	    new Role(authority: 'ROLE_USER').save(flush: true)
+	}
+
+	if (Role.list()?.size() > 0 && Users.list()?.size() == 0) {
+	    def user = new Users(username: "danimal", enabled: true, password: "danimal", accountExpired: false, accountLocked: false, passwordExpired: false)
+	    user.save(flush: true)
+	}
+
+	def danimal = Users.findByUsername('danimal')
+	def adminRole = Role.findByAuthority('ROLE_ADMIN')
+
+	if(danimal && adminRole){
+	    UserRole.create(danimal, adminRole, true)
+	}
     }
     def destroy = {
     }

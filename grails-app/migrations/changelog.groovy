@@ -265,4 +265,6 @@ databaseChangeLog = {
     }
 
 	include file: 'addSecurityDomains.groovy'
+
+	include file: 'migrateUserToUsers.groovy'
 }

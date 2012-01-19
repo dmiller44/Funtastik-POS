@@ -1,6 +1,6 @@
 package com.angrygiant.funtastik.security
 
-class User {
+class Users {
 
 	transient springSecurityService
 

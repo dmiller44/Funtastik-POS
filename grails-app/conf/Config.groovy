@@ -93,6 +93,6 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.angrygiant.funtastik.security.User'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.angrygiant.funtastik.security.Users'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.angrygiant.funtastik.security.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.angrygiant.funtastik.security.Role'
