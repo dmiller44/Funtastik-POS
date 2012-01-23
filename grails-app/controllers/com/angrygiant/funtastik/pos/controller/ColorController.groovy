@@ -2,7 +2,9 @@ package com.angrygiant.funtastik.pos.controller
 
 import org.springframework.dao.DataIntegrityViolationException
 import com.angrygiant.funtastik.pos.domain.Color
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class ColorController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

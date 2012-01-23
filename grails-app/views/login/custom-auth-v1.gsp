@@ -137,16 +137,16 @@
     </div>
 
     <div id="login-content">
-        <form method="post">
+        <form method="post" action="${postUrl}">
             <p>
                 <label>Username</label>
-                <input value="" name="username" class="text-input" type="text"/>
+                <input value="" name="j_username" class="text-input" type="text"/>
             </p>
             <br style="clear: both;"/>
 
             <p>
                 <label>Password</label>
-                <input name="password" class="text-input" type="password"/>
+                <input name="j_password" class="text-input" type="password"/>
             </p>
             <br style="clear: both;"/>
 
