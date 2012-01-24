@@ -137,7 +137,7 @@
     </div>
 
     <div id="login-content">
-        <form method="post" action="${postUrl}">
+        <form id="frmLogin" method="post" action="${postUrl}">
             <p>
                 <label>Username</label>
                 <input value="" name="j_username" class="text-input" type="text"/>
@@ -161,5 +161,14 @@
 <div id="dummy"></div>
 
 <div id="dummy2"></div>
+
+<script type="text/javascript">
+    $('body').hide();
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('body').fadeIn(3000);
+    });
+</script>
 </body>
 </html>
