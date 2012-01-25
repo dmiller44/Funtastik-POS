@@ -1,3 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    background: url('../../images/login-images/bg-login-top.png') repeat #fff;
+    font-size: 100%;
+    text-shadow: #050505 0 -1px 0;
+    font-weight: bold;
+}
+
 ul#navigation {
     display: none;
     position: fixed;

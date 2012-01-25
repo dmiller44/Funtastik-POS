@@ -7,6 +7,7 @@ class UrlMappings {
             }
         }
 
+        "/settings"(view: '/settings-landing')
         "/"(view: "/index")
         "500"(view: '/error')
     }

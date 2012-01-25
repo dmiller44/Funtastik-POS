@@ -3,7 +3,7 @@
 <head>
     <sec:ifNotLoggedIn>
         <script type="text/javascript">
-            window.location='<g:createLink controller="login" action="auth" />';
+            window.location = '<g:createLink controller="login" action="auth" />';
         </script>
     </sec:ifNotLoggedIn>
     <title>Funtastik | POS System</title>
@@ -35,8 +35,8 @@
             );
         });
 
-        function handleMenuClick(linkUri){
-            $('body').fadeOut(function(){
+        function handleMenuClick(linkUri) {
+            $('body').fadeOut(function () {
                 window.location = linkUri;
             });
         }
@@ -47,11 +47,13 @@
 
 <body>
 <ul id="navigation">
-    <li class="home"><a href="<g:createLink uri='/' />" onclick="handleMenuClick(this.href);return false;"><span>Home</span></a></li>
+    <li class="home"><a href="<g:createLink uri='/'/>" onclick="handleMenuClick(this.href);
+    return false;"><span>Home</span></a></li>
     <li class="register"><a href=""><span>Cash Register</span></a></li>
     <li class="search"><a href=""><span>Search</span></a></li>
-    <li class="settings"><a href=""><span>Settings</span></a></li>
-    <li class="logout"><a href="<g:createLink controller='logout'/>" onclick="handleMenuClick(this.href);return false;"><span>Logout</span></a></li>
+    <li class="settings"><a href="<g:createLink controller='settings'/>"><span>Settings</span></a></li>
+    <li class="logout"><a href="<g:createLink controller='logout'/>" onclick="handleMenuClick(this.href);
+    return false;"><span>Logout</span></a></li>
 </ul>
 <g:layoutBody/>
 </body>
