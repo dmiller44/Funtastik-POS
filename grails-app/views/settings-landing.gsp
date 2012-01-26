@@ -21,7 +21,9 @@
         <li class="sliding-element"><a href="${createLink(controller: 'color', action: 'list')}"
                                        onclick="handleSideNavClick(this.href);
                                        return false;">Colors</a></li>
-        <li class="sliding-element"><a href="#">Types/Subtypes</a></li>
+        <li class="sliding-element"><a href="${createLink(controller: 'itemType', action: 'list')}"
+                                       onclick="handleSideNavClick(this.href);
+                                       return false;">Types/Subtypes</a></li>
         <li class="sliding-element"><a href="#">Sizes</a></li>
         <li class="sliding-element"><a href="#">Inventory Items</a></li>
         <li class="sliding-element"><a href="#">POS Security</a></li>

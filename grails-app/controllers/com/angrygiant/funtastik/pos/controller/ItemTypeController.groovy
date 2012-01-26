@@ -14,8 +14,25 @@ class ItemTypeController {
     }
 
     def list() {
+        def query = {
+            if (params.name) {
+                ilike('name', '%' + params.name + '%')
+            }
+            if (params.sort) {
+                order(params.sort, params.order)
+            }
+        }
+
+        def criteria = ItemType.createCriteria()
+
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [itemTypeInstanceList: ItemType.list(params), itemTypeInstanceTotal: ItemType.count()]
+
+        def itemTypes = criteria.list(query, max: params.max, offset: params.offset)
+        def filters = [name: params.name]
+
+        def parameters = [itemTypeInstanceList: itemTypes, itemTypeInstanceTotal: ItemType.count(), filters: filters]
+
+        render(template: 'templates/listView', model: parameters)
     }
 
     def create() {
