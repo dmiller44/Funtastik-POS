@@ -14,8 +14,25 @@ class ColorController {
     }
 
     def list() {
+        def query = {
+            if (params.name) {
+                ilike('name', '%' + params.name + '%')
+            }
+            if (params.sort) {
+                order(params.sort, params.order)
+            }
+        }
+
+        def criteria = Color.createCriteria()
+
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [colorInstanceList: Color.list(params), colorInstanceTotal: Color.count()]
+
+        def colors = criteria.list(query, max: params.max, offset: params.offset)
+        def filters = [name: params.name]
+
+        def parameters = [colorInstanceList: colors, colorInstanceTotal: Color.count(), filters: filters]
+
+        render(template: 'templates/listView', model: parameters)
     }
 
     def create() {

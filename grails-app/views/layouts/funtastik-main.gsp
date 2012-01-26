@@ -40,6 +40,20 @@
                 window.location = linkUri;
             });
         }
+
+        function handleSideNavClick(linkUri) {
+            $.ajax({
+                type:'GET',
+                url:linkUri,
+                success:function (data) {
+                    $("div#mainContent").fadeOut('fast', function () {
+                        $(this).html(data).fadeIn('slow');
+                    });
+                }
+            });
+
+            return false;
+        }
     </script>
 
     <g:layoutHead/>
