@@ -55,25 +55,16 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="">
-                                <a href="#">Departments</a>
+                                <a href="#">Customer Management</a>
                             </li>
                             <li class="">
-                                <a href="#">Item Types/Subtypes</a>
+                                <a href="#">Transaction Management</a>
                             </li>
                             <li class="">
-                                <a href="#">Colors</a>
+                                <a href="#">Inventory Management</a>
                             </li>
                             <li class="">
-                                <a href="#">Manufacturers</a>
-                            </li>
-                            <li class="">
-                                <a href="#">Sizes</a>
-                            </li>
-                            <li class="">
-                                <a href="#">Inventory</a>
-                            </li>
-                            <li class="">
-                                <a href="#">Security</a>
+                                <a href="#">Security Management</a>
                             </li>
                         </ul>
                     </li>
