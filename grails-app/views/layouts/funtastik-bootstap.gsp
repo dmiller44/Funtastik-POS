@@ -33,7 +33,7 @@
             </form>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active">
+                    <li class="">
                         <a href="#">Overview</a>
                     </li>
                     <li class="">
@@ -61,7 +61,7 @@
                                 <a href="#">Transaction Management</a>
                             </li>
                             <li class="">
-                                <a href="#">Inventory Management</a>
+                                <a href="${createLink(uri: '/admin/inventory')}">Inventory Management</a>
                             </li>
                             <li class="">
                                 <a href="#">Security Management</a>

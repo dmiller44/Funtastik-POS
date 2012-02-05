@@ -7,8 +7,11 @@
 </head>
 
 <body>
-    <div class="span12">
-        <!-- side navigation for all things inventory management related -->
+    <div class="span3">
+        ${render(template: '/inventory/side-navigation-admin')}
     </div>
+	<div class="span9">
+		
+	</div>
 </body>
 </html>

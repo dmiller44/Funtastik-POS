@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 
-        "/settings"(view: '/landing')
+        "/admin/inventory"(view: '/inventory-mgmt-landing')
         "/"(view: "/landing")
         "/old"(view: "/index")
         "500"(view: '/error')
