@@ -62,6 +62,8 @@
         left: 30%;
         top: 20px;
         z-index: 100;
+        width: 685px;
+        height: 212px;
     }
 
     #login-top {
@@ -129,7 +131,7 @@
 
 <body id="login">
 
-<img class="funtastik-logo" src="<g:resource dir='images/funtastik-logos' file='old-funtastik-logo.gif'/>"
+<img class="funtastik-logo" src="<g:resource dir='images/funtastik-logos' file='newFuntastikLogo-black.png'/>"
      alt="Funtastik Login Form" title="Powered By AngryGiant.com"/>
 
 <div id="login-wrapper" class="png_bg">

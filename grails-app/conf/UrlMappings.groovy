@@ -7,8 +7,9 @@ class UrlMappings {
             }
         }
 
-        "/settings"(view: '/settings-landing')
-        "/"(view: "/index")
+        "/settings"(view: '/landing')
+        "/"(view: "/landing")
+        "/old"(view: "/index")
         "500"(view: '/error')
     }
 }
