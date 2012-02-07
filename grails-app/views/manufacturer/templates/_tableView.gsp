@@ -11,7 +11,7 @@
     <g:each in="${manufacturerInstanceList}" status="i" var="manufacturerInstance">
         <tr>
 			<td><g:if test="{manufacturerInstance?.preferredVendor}"><i class="icon-star"></i></g:if></td>
-            <td><g:link action="show"
+            <td><g:link action="edit"
                         id="${manufacturerInstance.id}">${fieldValue(bean: manufacturerInstance, field: "name")}</g:link></td>
 			<td>
 				${manufacturerInstance?.phoneNumber ?: 'N/A'}
@@ -23,6 +23,7 @@
     </g:each>
   </tbody>
 </table>
+<span style="float: right;"><a href="#" class="btn">Add...</a></span>
 
 <div class="pagination pagination-centered">
     <bootstrap:paginate total="${manufacturerInstanceTotal}"/>

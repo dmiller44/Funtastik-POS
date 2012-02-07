@@ -8,7 +8,7 @@
   <tbody>
     <g:each in="${sizeInstanceList}" status="i" var="sizeInstance">
         <tr>
-            <td><g:link action="show"
+            <td><g:link action="edit"
                         id="${sizeInstance.id}">${fieldValue(bean: sizeInstance, field: "name")}</g:link></td>
 			<td>
 				${sizeInstance?.itemType?.name ?: 'N/A'}
@@ -17,6 +17,7 @@
     </g:each>
   </tbody>
 </table>
+<span style="float: right;"><a href="#" class="btn">Add...</a></span>
 
 <div class="pagination pagination-centered">
     <bootstrap:paginate total="${sizeInstanceTotal}"/>
