@@ -32,7 +32,7 @@ class ColorController {
 
         def parameters = [colorInstanceList: colors, colorInstanceTotal: Color.count(), filters: filters]
 
-        render(template: 'templates/listView', model: parameters)
+        render(view: 'list', model: parameters)
     }
 
     def create() {

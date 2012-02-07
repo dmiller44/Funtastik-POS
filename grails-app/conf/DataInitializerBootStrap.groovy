@@ -28,6 +28,7 @@ class DataInitializerBootStrap {
             new Color(name: "Gold").save(flush: true)
             new Color(name: "Silver").save(flush: true)
             new Color(name: "Clear").save(flush: true)
+			new Color(name: "Pink").save(flush: true)
 
             log.info("Done adding initial colors")
         }

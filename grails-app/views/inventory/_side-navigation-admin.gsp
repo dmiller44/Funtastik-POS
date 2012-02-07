@@ -25,32 +25,32 @@
   <li class="nav-header">
     Detail Administration
   </li>
-  <li class="">
-    <a href="#">
+  <li id="department">
+    <a href="${createLink(controller: 'department', action: 'list')}">
 	<i class="icon-folder-open"></i>
 	Departments
 	</a>
   </li>
-  <li>
-    <a href="#">
+  <li id="manufacturer">
+    <a href="${createLink(controller: 'manufacturer', action: 'list')}">
 	<i class="icon-barcode"></i>
 	Manufacturers
 	</a>
   </li>
-	<li>
-	    <a href="#">
+	<li id="color">
+	    <a href="${createLink(controller: 'color', action: 'list')}">
 		<i class="icon-tint"></i>
 		Colors
 		</a>
 	  </li>
-	<li>
-	    <a href="#">
+	<li id="itemType">
+	    <a href="${createLink(controller: 'itemType', action: 'list')}">
 		<i class="icon-check"></i>
 		Types/Sub-Types
 		</a>
 	  </li>
-	<li>
-	    <a href="#">
+	<li id="size">
+	    <a href="${createLink(controller: 'size', action: 'list')}">
 		<i class="icon-signal"></i>
 		Sizes
 		</a>
