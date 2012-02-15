@@ -46,19 +46,8 @@ class ItemTypeController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'itemType.label', default: 'ItemType'), itemTypeInstance.id])
-        redirect(action: "show", id: itemTypeInstance.id)
-    }
-
-    def show() {
-        def itemTypeInstance = ItemType.get(params.id)
-        if (!itemTypeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'itemType.label', default: 'ItemType'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [itemTypeInstance: itemTypeInstance]
+        flash.message = "Item Type '${itemTypeInstance.name}' successfully added to the System"
+        redirect(action: "edit", id: itemTypeInstance.id)
     }
 
     def edit() {
@@ -98,8 +87,8 @@ class ItemTypeController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'itemType.label', default: 'ItemType'), itemTypeInstance.id])
-        redirect(action: "show", id: itemTypeInstance.id)
+        flash.message = "Changes saved Successfully"
+        redirect(action: "edit", id: itemTypeInstance.id)
     }
 
     def delete() {
