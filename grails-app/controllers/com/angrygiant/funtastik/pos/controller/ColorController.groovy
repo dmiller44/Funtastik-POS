@@ -98,8 +98,8 @@ class ColorController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'color.label', default: 'Color'), colorInstance.id])
-        redirect(action: "show", id: colorInstance.id)
+        flash.message = "Color changes were successfully saved!"
+        redirect(action: "edit", id: colorInstance.id)
     }
 
     def delete() {
