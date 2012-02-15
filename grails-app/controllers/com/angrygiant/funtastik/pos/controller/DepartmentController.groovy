@@ -29,19 +29,8 @@ class DepartmentController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
-        redirect(action: "show", id: departmentInstance.id)
-    }
-
-    def show() {
-        def departmentInstance = Department.get(params.id)
-        if (!departmentInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'department.label', default: 'Department'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [departmentInstance: departmentInstance]
+        flash.message = "Successfully added '${departmentInstance.name} to the System"
+        redirect(action: "edit", id: departmentInstance.id)
     }
 
     def edit() {
@@ -81,8 +70,8 @@ class DepartmentController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
-        redirect(action: "show", id: departmentInstance.id)
+        flash.message = "Changes saved successfully"
+        redirect(action: "edit", id: departmentInstance.id)
     }
 
     def delete() {
