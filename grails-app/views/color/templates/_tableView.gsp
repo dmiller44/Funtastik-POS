@@ -1,19 +1,19 @@
 <table class="table table-striped table-bordered table-condensed">
-  <thead>
+    <thead>
     <tr>
-      <th>Name</th>
+        <th>Name</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <g:each in="${colorInstanceList}" status="i" var="colorInstance">
         <tr>
             <td><g:link action="edit"
                         id="${colorInstance.id}">${fieldValue(bean: colorInstance, field: "name")}</g:link></td>
         </tr>
     </g:each>
-  </tbody>
+    </tbody>
 </table>
-<span style="float: right;"><a href="#" class="btn">Add...</a></span>
+<span style="float: right;"><a href="${createLink(action: 'create')}" class="btn">Add...</a></span>
 
 <div class="pagination pagination-centered">
     <bootstrap:paginate total="${colorInstanceTotal}"/>

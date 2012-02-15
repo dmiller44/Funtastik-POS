@@ -46,19 +46,8 @@ class ColorController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'color.label', default: 'Color'), colorInstance.id])
-        redirect(action: "show", id: colorInstance.id)
-    }
-
-    def show() {
-        def colorInstance = Color.get(params.id)
-        if (!colorInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'color.label', default: 'Color'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [colorInstance: colorInstance]
+        flash.message = "Successfully added '${colorInstance.name}' to the System"
+        redirect(action: "edit", id: colorInstance.id)
     }
 
     def edit() {
