@@ -2,8 +2,6 @@ package com.angrygiant.funtastik.pos.domain
 
 class ItemType {
 
-    static hasMany = [subTypes: ItemSubType]
-
     String name
     boolean retired
 

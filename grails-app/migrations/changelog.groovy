@@ -264,7 +264,9 @@ databaseChangeLog = {
         createSequence(sequenceName: "hibernate_sequence")
     }
 
-	include file: 'addSecurityDomains.groovy'
+    include file: 'addSecurityDomains.groovy'
 
-	include file: 'migrateUserToUsers.groovy'
+    include file: 'migrateUserToUsers.groovy'
+
+    include file: 'removeItemSubType.groovy'
 }

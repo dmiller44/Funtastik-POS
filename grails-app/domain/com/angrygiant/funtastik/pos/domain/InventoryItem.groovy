@@ -14,7 +14,6 @@ class InventoryItem {
     String skuCode
     boolean archived = false
     ItemType itemType
-    ItemSubType subType
     Manufacturer manufacturer
     Color color
 
@@ -23,7 +22,6 @@ class InventoryItem {
         name(blank: false, nullable: false, unique: true)
         description(blank: true, nullable: true)
         itemType(nullable: false)
-        subType(nullable: true)
         manufacturer(nullable: false)
         color(nullable: false)
         wholesalePrice()

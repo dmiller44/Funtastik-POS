@@ -35,16 +35,6 @@
               optionKey="id" required="" value="${inventoryItemInstance?.itemType?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: inventoryItemInstance, field: 'subType', 'error')} ">
-    <label for="subType">
-        <g:message code="inventoryItem.subType.label" default="Sub Type"/>
-
-    </label>
-    <g:select id="subType" name="subType.id" from="${com.angrygiant.funtastik.pos.domain.ItemSubType.list()}"
-              optionKey="id" value="${inventoryItemInstance?.subType?.id}" class="many-to-one"
-              noSelection="['null': '']"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: inventoryItemInstance, field: 'manufacturer', 'error')} required">
     <label for="manufacturer">
         <g:message code="inventoryItem.manufacturer.label" default="Manufacturer"/>
