@@ -29,19 +29,8 @@ class ManufacturerController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'manufacturer.label', default: 'Manufacturer'), manufacturerInstance.id])
-        redirect(action: "show", id: manufacturerInstance.id)
-    }
-
-    def show() {
-        def manufacturerInstance = Manufacturer.get(params.id)
-        if (!manufacturerInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'manufacturer.label', default: 'Manufacturer'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [manufacturerInstance: manufacturerInstance]
+        flash.message = "Successfully added '${manufacturerInstance.name}' to the System"
+        redirect(action: "edit", id: manufacturerInstance.id)
     }
 
     def edit() {
@@ -81,8 +70,8 @@ class ManufacturerController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'manufacturer.label', default: 'Manufacturer'), manufacturerInstance.id])
-        redirect(action: "show", id: manufacturerInstance.id)
+        flash.message = "Successfully saved Changes"
+        redirect(action: "edit", id: manufacturerInstance.id)
     }
 
     def delete() {
