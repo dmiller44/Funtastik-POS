@@ -29,19 +29,8 @@ class SizeController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'size.label', default: 'Size'), sizeInstance.id])
-        redirect(action: "show", id: sizeInstance.id)
-    }
-
-    def show() {
-        def sizeInstance = Size.get(params.id)
-        if (!sizeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'size.label', default: 'Size'), params.id])
-            redirect(action: "list")
-            return
-        }
-
-        [sizeInstance: sizeInstance]
+        flash.message = "Successfully saved size '${sizeInstance?.name}' for Type '${sizeInstance?.itemType?.name}'"
+        redirect(action: "edit", id: sizeInstance.id)
     }
 
     def edit() {
@@ -81,8 +70,8 @@ class SizeController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'size.label', default: 'Size'), sizeInstance.id])
-        redirect(action: "show", id: sizeInstance.id)
+        flash.message = "Successfully saved Changes"
+        redirect(action: "edit", id: sizeInstance.id)
     }
 
     def delete() {
