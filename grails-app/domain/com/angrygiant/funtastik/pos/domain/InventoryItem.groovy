@@ -16,6 +16,11 @@ class InventoryItem {
     ItemType itemType
     Manufacturer manufacturer
     Color color
+    
+    String createdBy = "SYSTEM"
+    Date createDate = new Date()
+    String updatedBy = "SYSTEM"
+    Date updatedDate = new Date()
 
     static constraints = {
         skuCode(blank: false, nullable: false, unique: true)
@@ -30,5 +35,9 @@ class InventoryItem {
         taxable()
         barcoded()
         archived()
+        createdBy(nullable: false, blank: false)
+        updatedBy(nullable: false, blank: false)
+        updatedDate(nullable: false)
+        createDate(nullable: false)
     }
 }

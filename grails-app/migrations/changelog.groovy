@@ -269,4 +269,6 @@ databaseChangeLog = {
     include file: 'migrateUserToUsers.groovy'
 
     include file: 'removeItemSubType.groovy'
+
+	include file: 'addAuditTrackingToInventoryItem.groovy'
 }
