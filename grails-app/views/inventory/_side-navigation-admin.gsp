@@ -14,8 +14,8 @@
             Find an Item
         </a>
     </li>
-    <li>
-        <a href="#">
+    <li id="addAnItem">
+        <a href="${createLink(controller: 'inventoryItem', action: 'create')}">
             <i class="icon-plus-sign"></i>
             Add an Item
         </a>
