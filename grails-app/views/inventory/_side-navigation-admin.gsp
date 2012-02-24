@@ -2,8 +2,8 @@
     <li class="nav-header">
         Inventory Control
     </li>
-    <li class="">
-        <a href="#">
+    <li id="itemList">
+        <a href="${createLink(controller: 'inventoryItem', action: 'list')}">
             <i class="icon-list"></i>
             Item List
         </a>

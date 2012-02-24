@@ -29,8 +29,8 @@ class InventoryItemController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'inventoryItem.label', default: 'InventoryItem'), inventoryItemInstance.id])
-        redirect(action: "show", id: inventoryItemInstance.id)
+        flash.message = "Inventory Item successfully created"
+        redirect(action: "list")
     }
 
     def show() {
