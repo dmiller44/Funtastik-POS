@@ -1,8 +1,7 @@
 dataSource {
     pooled = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -13,9 +12,9 @@ hibernate {
 environments {
     development {
         dataSource {
-            url = "jdbc:postgresql://localhost:5432/funtastik-dev"
-            driverClassName = "org.postgresql.Driver"
+            url = "jdbc:mysql://localhost/funtastikpos?useUnicode=yes&characterEncoding=UTF-8"
             username = "funtastik"
+            password = "funtastik"
         }
     }
     test {
