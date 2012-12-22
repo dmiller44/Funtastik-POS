@@ -14,7 +14,7 @@ class SizeController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 25, 100)
         [sizeInstanceList: Size.list(params), sizeInstanceTotal: Size.count()]
     }
 

@@ -25,7 +25,7 @@ class ColorController {
 
         def criteria = Color.createCriteria()
 
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 25, 100)
 
         def colors = criteria.list(query, max: params.max, offset: params.offset)
         def filters = [name: params.name]
