@@ -1,5 +1,6 @@
 package com.angrygiant.funtastik.pos.controller
 
+import com.angrygiant.funtastik.pos.domain.Size
 import org.springframework.dao.DataIntegrityViolationException
 import com.angrygiant.funtastik.pos.domain.ItemType
 import grails.plugins.springsecurity.Secured
@@ -58,7 +59,9 @@ class ItemTypeController {
             return
         }
 
-        [itemTypeInstance: itemTypeInstance]
+        int sizeCount = Size.findAllByItemType(itemTypeInstance).size()
+
+        [itemTypeInstance: itemTypeInstance, dependencyCount: sizeCount]
     }
 
     def update() {

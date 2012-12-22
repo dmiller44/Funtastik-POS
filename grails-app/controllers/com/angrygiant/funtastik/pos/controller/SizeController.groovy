@@ -1,5 +1,6 @@
 package com.angrygiant.funtastik.pos.controller
 
+import com.angrygiant.funtastik.pos.domain.ItemType
 import org.springframework.dao.DataIntegrityViolationException
 import com.angrygiant.funtastik.pos.domain.Size
 import grails.plugins.springsecurity.Secured
@@ -16,6 +17,18 @@ class SizeController {
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 25, 100)
         [sizeInstanceList: Size.list(params), sizeInstanceTotal: Size.count()]
+    }
+
+    def listDependents() {
+        if (!params.id) {
+            redirect(action: "list", params: params)
+        }
+        ItemType itemType = ItemType.get(params.id)
+
+        params.max = Math.min(params.max ? params.int('max') : 25, 100)
+        def model = [sizeInstanceList: Size.findAllByItemType(itemType, params), sizeInstanceTotal: Size.findAllByItemType(itemType, params).size()]
+
+        render(view: 'list', model: model)
     }
 
     def create() {
