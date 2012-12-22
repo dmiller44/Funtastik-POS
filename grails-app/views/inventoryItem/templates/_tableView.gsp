@@ -3,12 +3,13 @@
     <tr>
         <th></th>
         <th></th>
-        <th>SKU Code</th>
+        <th>SKU</th>
         <th>Name</th>
         <th>Type</th>
         <th>Color</th>
-        <th>Wholesale Price</th>
-        <th>Retail Price</th>
+        <th>Wholesale</th>
+        <th>Retail</th>
+        <th>QOH</th>
         <sec:ifAllGranted roles="ROLE_ADMIN">
             <th></th>
         </sec:ifAllGranted>
@@ -35,6 +36,9 @@
             </td>
             <td>
                 ${formatNumber(number: inventoryItemInstance?.retailPrice, type: 'currency')}
+            </td>
+            <td>
+                ${inventoryItemInstance?.qoh ?: '0'}
             </td>
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <td>
