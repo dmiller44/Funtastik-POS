@@ -9,6 +9,9 @@
         <th>Color</th>
         <th>Wholesale Price</th>
         <th>Retail Price</th>
+        <sec:ifAllGranted roles="ROLE_ADMIN">
+            <th></th>
+        </sec:ifAllGranted>
     </tr>
     </thead>
     <tbody>
@@ -28,11 +31,17 @@
                 ${inventoryItemInstance?.color?.name ?: 'N/A'}
             </td>
             <td>
-                ${inventoryItemInstance?.wholesalePrice ?: 'N/A'}
+                ${formatNumber(number: inventoryItemInstance?.wholesalePrice, type: 'currency')}
             </td>
             <td>
-                ${inventoryItemInstance?.retailPrice ?: 'N/A'}
+                ${formatNumber(number: inventoryItemInstance?.retailPrice, type: 'currency')}
             </td>
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <td>
+                    <a href="${createLink(action: 'delete', id: inventoryItemInstance?.id)}"><i class="icon-remove"></i>
+                    </a>
+                </td>
+            </sec:ifAllGranted>
         </tr>
     </g:each>
     </tbody>

@@ -28,7 +28,7 @@ class DataInitializerBootStrap {
             new Color(name: "Gold").save(flush: true)
             new Color(name: "Silver").save(flush: true)
             new Color(name: "Clear").save(flush: true)
-			new Color(name: "Pink").save(flush: true)
+            new Color(name: "Pink").save(flush: true)
 
             log.info("Done adding initial colors")
         }
@@ -76,25 +76,28 @@ class DataInitializerBootStrap {
             log.info("Done adding initial sizes")
         }
 
-	//set up initial roles
-	if (Role.list()?.size() == 0) {
-	    log.warn("Creating initial roles for application")
+        //set up initial roles
+        if (Role.list()?.size() == 0) {
+            log.warn("Creating initial roles for application")
 
-	    new Role(authority: 'ROLE_ADMIN').save(flush: true)
-	    new Role(authority: 'ROLE_USER').save(flush: true)
-	}
+            new Role(authority: 'ROLE_ADMIN').save(flush: true)
+            new Role(authority: 'ROLE_USER').save(flush: true)
+        }
 
-	if (Role.list()?.size() > 0 && Users.list()?.size() == 0) {
-	    def user = new Users(username: "danimal", enabled: true, password: "danimal", accountExpired: false, accountLocked: false, passwordExpired: false)
-	    user.save(flush: true)
-	}
+        if (Role.list()?.size() > 0 && Users.list()?.size() == 0) {
+            def user = new Users(username: "danimal", enabled: true, password: "danimal", accountExpired: false, accountLocked: false, passwordExpired: false)
+            user.save(flush: true)
+        }
 
-	def danimal = Users.findByUsername('danimal')
-	def adminRole = Role.findByAuthority('ROLE_ADMIN')
+        def danimal = Users.findByUsername('danimal')
+        def adminRole = Role.findByAuthority('ROLE_ADMIN')
 
-	if(danimal && adminRole){
-	    UserRole.create(danimal, adminRole, true)
-	}
+        def userRole = UserRole.findByUserAndRole(danimal, adminRole)
+
+        if (danimal && adminRole && !userRole) {
+            log.warn("Creating default DANIMAL user...")
+            UserRole.create(danimal, adminRole, true)
+        }
     }
     def destroy = {
     }

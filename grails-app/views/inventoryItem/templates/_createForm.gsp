@@ -85,7 +85,7 @@
 
             <div class="controls">
                 $<input type="text" class="span1" id="wholesalePrice" name="wholesalePrice"
-                        value="${inventoryItemInstance?.wholesalePrice}">
+                        value="${formatNumber(number: inventoryItemInstance?.wholesalePrice, format: '0.00')}">
             </div>
         </div>
 
@@ -94,7 +94,7 @@
 
             <div class="controls">
                 $<input type="text" class="span1" id="retailPrice" name="retailPrice"
-                        value="${inventoryItemInstance?.retailPrice}">
+                        value="${formatNumber(number: inventoryItemInstance?.retailPrice, format: '0.00')}">
             </div>
         </div>
 
