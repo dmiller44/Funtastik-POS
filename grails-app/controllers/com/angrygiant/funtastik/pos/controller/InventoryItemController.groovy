@@ -81,8 +81,8 @@ class InventoryItemController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'inventoryItem.label', default: 'InventoryItem'), inventoryItemInstance.id])
-        redirect(action: "show", id: inventoryItemInstance.id)
+        flash.message = "Changes saved successfully"
+        redirect(action: "edit", id: inventoryItemInstance.id)
     }
 
     def delete() {

@@ -38,7 +38,9 @@
             </td>
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <td>
-                    <a href="${createLink(action: 'delete', id: inventoryItemInstance?.id)}"><i class="icon-remove"></i>
+                    <a href="${createLink(action: 'delete', id: inventoryItemInstance?.id)}"
+                       onclick="return confirm('Do you really wish to delete ${inventoryItemInstance?.name}?');">
+                        <i class="icon-remove"></i>
                     </a>
                 </td>
             </sec:ifAllGranted>
