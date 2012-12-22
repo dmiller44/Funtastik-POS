@@ -42,7 +42,7 @@
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Create Manufacturer</button>
-            <button type="reset" class="btn">Cancel</button>
+            <a href="${createLink(action: 'list')}" class="btn">Return Home</a>
         </div>
     </fieldset>
 </g:form>

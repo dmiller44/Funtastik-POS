@@ -12,7 +12,7 @@
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Create Color</button>
-            <button type="reset" class="btn">Cancel</button>
+            <a href="${createLink(action: 'list')}" class="btn">Return Home</a>
         </div>
     </fieldset>
 </g:form>
