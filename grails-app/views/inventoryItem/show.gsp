@@ -129,16 +129,16 @@
             </li>
         </g:if>
 
-        <g:if test="${inventoryItemInstance?.qoh}">
-            <li class="fieldcontain">
-                <span id="qoh-label" class="property-label"><g:message code="inventoryItem.qoh.label"
-                                                                       default="Qoh"/></span>
+    %{--<g:if test="${inventoryItemInstance?.qoh}">--}%
+    %{--<li class="fieldcontain">--}%
+    %{--<span id="qoh-label" class="property-label"><g:message code="inventoryItem.qoh.label"--}%
+    %{--default="Qoh"/></span>--}%
 
-                <span class="property-value" aria-labelledby="qoh-label"><g:fieldValue bean="${inventoryItemInstance}"
-                                                                                       field="qoh"/></span>
+    %{--<span class="property-value" aria-labelledby="qoh-label"><g:fieldValue bean="${inventoryItemInstance}"--}%
+    %{--field="qoh"/></span>--}%
 
-            </li>
-        </g:if>
+    %{--</li>--}%
+    %{--</g:if>--}%
 
         <g:if test="${inventoryItemInstance?.taxable}">
             <li class="fieldcontain">

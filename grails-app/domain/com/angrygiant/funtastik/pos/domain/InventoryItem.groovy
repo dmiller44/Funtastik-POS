@@ -6,7 +6,6 @@ class InventoryItem {
 
     String name
     String description
-    int qoh = 0
     double wholesalePrice
     double retailPrice
     boolean taxable = false
@@ -16,7 +15,7 @@ class InventoryItem {
     ItemType itemType
     Manufacturer manufacturer
     Color color
-    
+
     String createdBy = "SYSTEM"
     Date createDate = new Date()
     String updatedBy = "SYSTEM"
@@ -31,7 +30,6 @@ class InventoryItem {
         color(nullable: false)
         wholesalePrice()
         retailPrice()
-        qoh()
         taxable()
         barcoded()
         archived()

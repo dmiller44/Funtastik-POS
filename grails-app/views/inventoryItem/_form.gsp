@@ -71,13 +71,13 @@
              value="${fieldValue(bean: inventoryItemInstance, field: 'retailPrice')}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: inventoryItemInstance, field: 'qoh', 'error')} required">
-    <label for="qoh">
-        <g:message code="inventoryItem.qoh.label" default="Qoh"/>
-        <span class="required-indicator">*</span>
-    </label>
-    <g:field type="number" name="qoh" required="" value="${fieldValue(bean: inventoryItemInstance, field: 'qoh')}"/>
-</div>
+%{--<div class="fieldcontain ${hasErrors(bean: inventoryItemInstance, field: 'qoh', 'error')} required">--}%
+%{--<label for="qoh">--}%
+%{--<g:message code="inventoryItem.qoh.label" default="Qoh"/>--}%
+%{--<span class="required-indicator">*</span>--}%
+%{--</label>--}%
+%{--<g:field type="number" name="qoh" required="" value="${fieldValue(bean: inventoryItemInstance, field: 'qoh')}"/>--}%
+%{--</div>--}%
 
 <div class="fieldcontain ${hasErrors(bean: inventoryItemInstance, field: 'taxable', 'error')} ">
     <label for="taxable">
