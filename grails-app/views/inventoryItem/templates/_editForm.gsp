@@ -105,6 +105,56 @@
             </div>
         </div>
 
+        <div class="control-group">
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <td style="font-weight: bold">Size</td>
+                    <td style="font-weight: bold">Quantity on Hand</td>
+                    <td style="font-weight: bold">Price Quantifier</td>
+                    <td style="font-weight: bold">&nbsp;</td>
+                </tr>
+                </thead>
+                <tbody>
+                <g:if test="${inventoryItemRecords.size() > 0}">
+                    <g:each in="${inventoryItemRecords}" status="i" var="inventoryRecord">
+                        <tr>
+                            <td>${inventoryRecord?.size?.name}</td>
+                            <td>${inventoryRecord?.qoh}</td>
+                            <td>${inventoryRecord?.priceQuantifier}</td>
+                            <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <td style="text-align: center;">
+                                    <a href="${createLink(action: 'deleteSizeOnItem', id: inventoryRecord?.id)}"
+                                       onclick="return confirm('Do you really wish to delete size ${inventoryRecord?.size?.name}?');">
+                                        <i class="icon-remove"></i>
+                                    </a>
+                                </td>
+                            </sec:ifAllGranted>
+                        </tr>
+                    </g:each>
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                        <td style="text-align: center">
+                            <a href="${createLink(action: 'addSizeToItem', id: inventoryItemInstance?.id)}">
+                                <i class="icon-plus-sign"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </g:if>
+                <g:else>
+                    <tr>
+                        <td colspan="3" style="text-align: center;">No Sizes Available</td>
+                        <td style="text-align: center">
+                            <a href="${createLink(action: 'addSizeToItem', id: inventoryItemInstance?.id)}">
+                                <i class="icon-plus-sign"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </g:else>
+                </tbody>
+            </table>
+        </div>
+
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Update Item</button>
             <a href="${createLink(action: 'list')}" class="btn">Return Home</a>
