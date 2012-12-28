@@ -64,15 +64,6 @@
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="qoh">Current Quantity</label>
-
-            <div class="controls">
-                <input type="text" class="input-small" id="qoh" name="qoh"
-                       value="${inventoryItemInstance?.qoh}" disabled="true">
-            </div>
-        </div>
-
-        <div class="control-group">
             <label class="control-label" for="taxable">Taxable?</label>
 
             <div class="controls">

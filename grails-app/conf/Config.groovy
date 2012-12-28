@@ -97,4 +97,4 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.angrygian
 grails.plugins.springsecurity.authority.className = 'com.angrygiant.funtastik.security.Role'
 
 grails.plugin.databasemigration.updateOnStart = true
-grails.plugin.databasemigration.updateOnStartFileNames = ['mysql-changelog.groovy']
+grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
