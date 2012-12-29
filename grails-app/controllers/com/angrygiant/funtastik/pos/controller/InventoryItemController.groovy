@@ -163,6 +163,16 @@ class InventoryItemController {
         redirect(action: "edit", id: inventoryId)
     }
 
+    def editQoh() {
+        println "My Params: ${params}"
+
+        InventoryItemRecord record = InventoryItemRecord.get(Long.parseLong(params.recordId))
+        record.qoh = Integer.parseInt(params.newQoh)
+        record.save(flush: true)
+
+        redirect(action: "edit", id: params.inventoryId)
+    }
+
     def update() {
         def inventoryItemInstance = InventoryItem.get(params.id)
         if (!inventoryItemInstance) {

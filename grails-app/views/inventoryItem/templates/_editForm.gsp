@@ -138,7 +138,7 @@
                     <g:each in="${inventoryItemRecords}" status="i" var="inventoryRecord">
                         <tr>
                             <td>${inventoryRecord?.size?.name}</td>
-                            <td>${inventoryRecord?.qoh}</td>
+                            <td onclick="showQohModal('${inventoryRecord.id}', '${inventoryRecord.qoh}');">${inventoryRecord?.qoh}</td>
                             <td>${inventoryRecord?.priceQuantifier}</td>
                             <sec:ifAllGranted roles="ROLE_ADMIN">
                                 <td style="text-align: center;">
@@ -189,3 +189,38 @@
         </div>
     </fieldset>
 </g:form>
+
+<div id="editQohModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="myModalLabel">Edit Quantity On Hand</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineEditQoh" class="form-horizontal" action="${createLink(action: 'editQoh')}" method="POST">
+            <g:hiddenField name="recordId" value="-1"/>
+            <g:hiddenField name="inventoryId" value="${inventoryItemInstance.id}"/>
+            <div class="control-group">
+                <label class="control-label" for="newQoh">New Quantity</label>
+
+                <div class="controls">
+                    <g:textField id="newQoh" name="newQoh" value="-1"/>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <a href="#" onclick="$('#editQohModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showQohModal(recordId, qoh) {
+        $('#recordId').val(recordId);
+        $('#newQoh').val(qoh);
+        $('#editQohModal').modal('show');
+    }
+</script>

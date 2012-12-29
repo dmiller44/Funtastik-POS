@@ -3,7 +3,6 @@
 <head>
     <meta name="layout" content="funtastik-bootstap"/>
     <title>Funtastik | POS System</title>
-
 </head>
 
 <body>
