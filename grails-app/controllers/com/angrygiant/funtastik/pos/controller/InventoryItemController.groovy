@@ -153,6 +153,12 @@ class InventoryItemController {
         }
 
         try {
+            def inventoryRecords = InventoryItemRecord.findAllByInventoryItem(inventoryItemInstance)
+
+            for (InventoryItemRecord record : inventoryRecords) {
+                record.delete(flush: true)
+            }
+
             inventoryItemInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'inventoryItem.label', default: 'InventoryItem'), params.id])
             redirect(action: "list")
