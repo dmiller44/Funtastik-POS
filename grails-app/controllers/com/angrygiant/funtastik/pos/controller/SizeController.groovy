@@ -8,7 +8,9 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class SizeController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
+
+    def sizesService
 
     def index() {
         redirect(action: "list", params: params)
@@ -16,7 +18,15 @@ class SizeController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 25, 100)
-        [sizeInstanceList: Size.list(params), sizeInstanceTotal: Size.count()]
+        Map hasSizes = [:]
+
+        def sizes = Size.list(params)
+
+        for (Size s : sizes) {
+            hasSizes.put(s.id, sizesService.hasSizesUsed(s))
+        }
+
+        [sizeInstanceList: sizes, sizeInstanceTotal: Size.count(), hasSizes: hasSizes]
     }
 
     def listDependents() {
@@ -102,7 +112,7 @@ class SizeController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'size.label', default: 'Size'), params.id])
-            redirect(action: "show", id: params.id)
+            redirect(action: "list")
         }
     }
 }
