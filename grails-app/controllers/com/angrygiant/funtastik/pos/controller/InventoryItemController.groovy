@@ -68,9 +68,9 @@ class InventoryItemController {
             return
         }
 
-        def itemSizes = Size.findAllByItemType(inventoryItemInstance.itemType)
+        def availableSizes = Size.executeQuery("FROM Size as size WHERE size.id NOT IN (SELECT record.size.id FROM InventoryItemRecord record WHERE record.inventoryItem.id = ${inventoryItemInstance.id}) AND size.itemType.id = ${inventoryItemInstance.itemType.id}")
 
-        [inventoryItemInstance: inventoryItemInstance, sizes: itemSizes]
+        [inventoryItemInstance: inventoryItemInstance, sizes: availableSizes]
     }
 
     def saveSizeToItem() {
