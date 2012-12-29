@@ -421,4 +421,6 @@ databaseChangeLog = {
     changeSet(author: "hfdpm100 (generated)", id: "1356724603703-40") {
         addForeignKeyConstraint(baseColumnNames: "user_id", baseTableName: "user_role", constraintName: "FK143BF46A61680625", deferrable: "false", initiallyDeferred: "false", referencedColumnNames: "id", referencedTableName: "users", referencesUniqueColumn: "false")
     }
+
+    include file: 'addingPosSystemObjects.groovy'
 }
