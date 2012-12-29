@@ -52,28 +52,30 @@
                     <li class="">
                         <a href="#">Help</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#"
-                           class="dropdown-toggle"
-                           data-toggle="dropdown">
-                            Administration
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="">
-                                <a href="#">Customer Management</a>
-                            </li>
-                            <li class="">
-                                <a href="#">Transaction Management</a>
-                            </li>
-                            <li class="">
-                                <a href="${createLink(uri: '/admin/inventory')}">Inventory Management</a>
-                            </li>
-                            <li class="">
-                                <a href="#">Security Management</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <sec:ifAllGranted roles="ROLE_ADMIN">
+                        <li class="dropdown">
+                            <a href="#"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown">
+                                Administration
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a href="#">Customer Management</a>
+                                </li>
+                                <li class="">
+                                    <a href="#">Transaction Management</a>
+                                </li>
+                                <li class="">
+                                    <a href="${createLink(uri: '/admin/inventory')}">Inventory Management</a>
+                                </li>
+                                <li class="">
+                                    <a href="#">Security Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </sec:ifAllGranted>
                     <li class="">
                         <a href="${createLink(controller: 'logout')}">Logout</a>
                     </li>

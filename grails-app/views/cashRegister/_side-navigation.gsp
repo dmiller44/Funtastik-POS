@@ -27,7 +27,7 @@
         </a>
     </li>
     <li id="itemLookup">
-        <a href="#">
+        <a href="${createLink(controller: 'search', action: 'inventorySearch', id: 'cashRegister')}">
             <i class="icon-barcode"></i>
             Item Lookup
         </a>

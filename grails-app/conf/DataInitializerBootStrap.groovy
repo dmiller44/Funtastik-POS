@@ -87,6 +87,9 @@ class DataInitializerBootStrap {
         if (Role.list()?.size() > 0 && Users.list()?.size() == 0) {
             def user = new Users(username: "danimal", enabled: true, password: "danimal", accountExpired: false, accountLocked: false, passwordExpired: false)
             user.save(flush: true)
+
+            def regUser = new Users(username: "joe", enabled: true, password: 'user', accountExpired: false, accountLocked: false, passwordExpired: false)
+            regUser.save(flush: true)
         }
 
         def danimal = Users.findByUsername('danimal')
@@ -97,6 +100,17 @@ class DataInitializerBootStrap {
         if (danimal && adminRole && !userRole) {
             log.warn("Creating default DANIMAL user...")
             UserRole.create(danimal, adminRole, true)
+        }
+
+        //create a second "regular" user
+        def regularUser = Users.findByUsername('joe')
+        def regularRole = Role.findByAuthority("ROLE_USER")
+
+        def regularUserRole = UserRole.findByUserAndRole(regularUser, regularRole)
+
+        if (regularUser && regularRole && !regularUserRole) {
+            log.warn("Creating default REGULAR user...")
+            UserRole.create(regularUser, regularRole, true)
         }
     }
     def destroy = {
