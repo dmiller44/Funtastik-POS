@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>&nbsp;</th>
     </tr>
     </thead>
     <tbody>
@@ -9,6 +10,14 @@
         <tr>
             <td><g:link action="edit"
                         id="${itemTypeInstance.id}">${fieldValue(bean: itemTypeInstance, field: "name")}</g:link></td>
+            <td>
+                <g:if test="${!hasItemTypes.get(itemTypeInstance.id)}">
+                    <a href="${createLink(action: 'delete', id: itemTypeInstance?.id)}"
+                       onclick="return confirm('Do you really wish to delete ${itemTypeInstance?.name}?');">
+                        <i class="icon-remove"></i>
+                    </a>
+                </g:if>
+            </td>
         </tr>
     </g:each>
     </tbody>
