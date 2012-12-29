@@ -132,24 +132,34 @@
                             </sec:ifAllGranted>
                         </tr>
                     </g:each>
-                    <tr>
-                        <td colspan="3">&nbsp;</td>
-                        <td style="text-align: center">
-                            <a href="${createLink(action: 'addSizeToItem', id: inventoryItemInstance?.id)}">
-                                <i class="icon-plus-sign"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <g:if test="${availableSizesCount > 0}">
+                        <tr>
+                            <td colspan="3">&nbsp;</td>
+                            <td style="text-align: center">
+                                <a href="${createLink(action: 'addSizeToItem', id: inventoryItemInstance?.id)}">
+                                    <i class="icon-plus-sign"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </g:if>
                 </g:if>
                 <g:else>
-                    <tr>
-                        <td colspan="3" style="text-align: center;">No Sizes Available</td>
-                        <td style="text-align: center">
-                            <a href="${createLink(action: 'addSizeToItem', id: inventoryItemInstance?.id)}">
-                                <i class="icon-plus-sign"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <g:if test="${availableSizesCount > 0}">
+                        <tr>
+                            <td colspan="3" style="text-align: center;">No Sizes Available</td>
+                            <td style="text-align: center">
+                                <a href="${createLink(action: 'addSizeToItem', id: inventoryItemInstance?.id)}">
+                                    <i class="icon-plus-sign"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </g:if>
+                    <g:else>
+                        <tr>
+                            <td colspan="4"
+                                style="text-align: center;">No available Sizes - Make sure Item Type's and Sizes are correctly set up.</td>
+                        </tr>
+                    </g:else>
                 </g:else>
                 </tbody>
             </table>

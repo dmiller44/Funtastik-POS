@@ -11,6 +11,8 @@ class InventoryItemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
+    def sizesService
+
     def index() {
         redirect(action: "list", params: params)
     }
@@ -55,8 +57,9 @@ class InventoryItemController {
         }
 
         def inventoryItemRecords = InventoryItemRecord.findAllByInventoryItem(inventoryItemInstance)
+        int availableSizesCount = sizesService.getAvailableSizesForItem(inventoryItemInstance.id, inventoryItemInstance.itemType.id).size()
 
-        [inventoryItemInstance: inventoryItemInstance, inventoryItemRecords: inventoryItemRecords]
+        [inventoryItemInstance: inventoryItemInstance, inventoryItemRecords: inventoryItemRecords, availableSizesCount: availableSizesCount]
     }
 
     def addSizeToItem() {
@@ -68,7 +71,7 @@ class InventoryItemController {
             return
         }
 
-        def availableSizes = Size.executeQuery("FROM Size as size WHERE size.id NOT IN (SELECT record.size.id FROM InventoryItemRecord record WHERE record.inventoryItem.id = ${inventoryItemInstance.id}) AND size.itemType.id = ${inventoryItemInstance.itemType.id}")
+        def availableSizes = sizesService.getAvailableSizesForItem(inventoryItemInstance.id, inventoryItemInstance.itemType.id);
 
         [inventoryItemInstance: inventoryItemInstance, sizes: availableSizes]
     }
