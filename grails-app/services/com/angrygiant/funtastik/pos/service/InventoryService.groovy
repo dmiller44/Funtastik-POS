@@ -10,12 +10,14 @@ import com.angrygiant.funtastik.pos.domain.Manufacturer
 class InventoryService {
 
     int getTotalQuantityOnHand(InventoryItem inventoryItem) {
-        return InventoryItemRecord.withCriteria {
+        def result = InventoryItemRecord.withCriteria {
             projections {
                 sum('qoh')
             }
             eq("inventoryItem", inventoryItem)
-        }.get(0)
+        }?.get(0)
+
+        return result ?: 0
     }
 
     boolean haveColorsBeenUsed(Color color) {
