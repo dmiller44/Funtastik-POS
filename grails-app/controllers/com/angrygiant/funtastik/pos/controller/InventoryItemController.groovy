@@ -1,5 +1,6 @@
 package com.angrygiant.funtastik.pos.controller
 
+import com.angrygiant.funtastik.pos.domain.Department
 import com.angrygiant.funtastik.pos.domain.InventoryItemRecord
 import com.angrygiant.funtastik.pos.domain.Size
 import org.springframework.dao.DataIntegrityViolationException
@@ -47,6 +48,54 @@ class InventoryItemController {
         }
 
         [inventoryItemInstance: inventoryItemInstance]
+    }
+
+    def showDepartments() {
+        def inventoryItemInstance = InventoryItem.get(params.id)
+        if (!inventoryItemInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'inventoryItem.label', default: 'InventoryItem'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        def departments = Department.findAllByRetired(false)
+
+        [inventoryItemInstance: inventoryItemInstance, departments: departments]
+    }
+
+    def addDepartments() {
+        def inventoryItemInstance = InventoryItem.get(params.id)
+        if (!inventoryItemInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'inventoryItem.label', default: 'InventoryItem'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        //remove inventory item depts
+        def departments = []
+        departments.addAll(inventoryItemInstance.departments)
+
+        departments.each {
+            inventoryItemInstance.removeFromDepartments(it)
+        }
+
+        inventoryItemInstance.save(flush: true)
+
+        List checkedDepartments = []
+        if (params.checkedDepartments.class.equals(java.lang.String.class)) {
+            checkedDepartments.add(params.checkedDepartments)
+        } else {
+            checkedDepartments = params.checkedDepartments
+        }
+
+        for (String deptId : checkedDepartments) {
+            Department dept = Department.get(Long.parseLong(deptId))
+
+            inventoryItemInstance.addToDepartments(dept)
+            inventoryItemInstance.save(flush: true)
+        }
+
+        redirect(action: 'edit', id: params.id)
     }
 
     def edit() {

@@ -40,7 +40,8 @@
             <label class="control-label" for="departments">Departments</label>
 
             <div class="controls" style="margin-top: 5px;">
-                <a href="#" id="departments">${inventoryItemInstance.departments?.size()} Depts.</a>
+                <a href="${createLink(action: 'showDepartments', id: inventoryItemInstance.id)}"
+                   id="departments">${inventoryItemInstance.departments?.size()} Depts.</a>
             </div>
         </div>
 
