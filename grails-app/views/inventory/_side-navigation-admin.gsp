@@ -9,7 +9,7 @@
         </a>
     </li>
     <li>
-        <a href="#">
+        <a href="${createLink(controller: 'search', action: 'inventorySearch')}">
             <i class="icon-search"></i>
             Find an Item
         </a>
