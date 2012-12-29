@@ -2,6 +2,7 @@
 .project
 *.iws
 *.iml
+.DS_Store
 .idea/
 .settings/
 grails-*.zip
