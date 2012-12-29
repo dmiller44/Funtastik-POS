@@ -1,6 +1,7 @@
 package com.angrygiant.funtastik.pos.service
 
 import com.angrygiant.funtastik.pos.domain.Color
+import com.angrygiant.funtastik.pos.domain.Department
 import com.angrygiant.funtastik.pos.domain.InventoryItem
 import com.angrygiant.funtastik.pos.domain.InventoryItemRecord
 import com.angrygiant.funtastik.pos.domain.ItemType
@@ -27,5 +28,10 @@ class InventoryService {
 
     boolean haveItemTypesBeenUsed(ItemType itemType) {
         return InventoryItem.findAllByItemType(itemType).size() > 0
+    }
+
+    boolean haveDepartmentsBeenUsed(Department department) {
+
+        return InventoryItem.executeQuery("SELECT inventoryItem FROM InventoryItem inventoryItem JOIN inventoryItem.departments as departments WHERE departments.id = ${department.id}").size() > 0
     }
 }
