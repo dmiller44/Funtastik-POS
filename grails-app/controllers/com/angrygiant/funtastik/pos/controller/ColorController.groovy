@@ -47,7 +47,7 @@ class ColorController {
         }
 
         flash.message = "Successfully added '${colorInstance.name}' to the System"
-        redirect(action: "edit", id: colorInstance.id)
+        redirect(action: "create")
     }
 
     def edit() {

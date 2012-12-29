@@ -48,7 +48,7 @@ class ItemTypeController {
         }
 
         flash.message = "Item Type '${itemTypeInstance.name}' successfully added to the System"
-        redirect(action: "edit", id: itemTypeInstance.id)
+        redirect(action: "create")
     }
 
     def edit() {

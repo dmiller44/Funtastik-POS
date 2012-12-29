@@ -30,7 +30,7 @@ class DepartmentController {
         }
 
         flash.message = "Successfully added '${departmentInstance.name} to the System"
-        redirect(action: "edit", id: departmentInstance.id)
+        redirect(action: "create")
     }
 
     def edit() {

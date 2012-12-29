@@ -43,7 +43,7 @@ class SizeController {
         }
 
         flash.message = "Successfully saved size '${sizeInstance?.name}' for Type '${sizeInstance?.itemType?.name}'"
-        redirect(action: "edit", id: sizeInstance.id)
+        redirect(action: "create")
     }
 
     def edit() {

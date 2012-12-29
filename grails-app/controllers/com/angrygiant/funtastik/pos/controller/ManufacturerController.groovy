@@ -30,7 +30,7 @@ class ManufacturerController {
         }
 
         flash.message = "Successfully added '${manufacturerInstance.name}' to the System"
-        redirect(action: "edit", id: manufacturerInstance.id)
+        redirect(action: "create")
     }
 
     def edit() {
