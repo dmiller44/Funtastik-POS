@@ -37,6 +37,14 @@
         </div>
 
         <div class="control-group">
+            <label class="control-label" for="departments">Departments</label>
+
+            <div class="controls" style="margin-top: 5px;">
+                <a href="#" id="departments">${inventoryItemInstance.departments?.size()} Depts.</a>
+            </div>
+        </div>
+
+        <div class="control-group">
             <label class="control-label" for="qoh">Total Quantity</label>
 
             <div class="controls">
