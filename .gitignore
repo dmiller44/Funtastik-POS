@@ -2,6 +2,7 @@
 .project
 *.iws
 *.iml
+*.log
 .DS_Store
 .idea/
 .settings/
