@@ -37,6 +37,15 @@
         </div>
 
         <div class="control-group">
+            <label class="control-label" for="qoh">Total Quantity</label>
+
+            <div class="controls">
+                <input type="text" class="input-small" id="qoh" name="qoh" disabled="true"
+                       value="${totalQoh}">
+            </div>
+        </div>
+
+        <div class="control-group">
             <label class="control-label" for="itemType">Item Type</label>
 
             <div class="controls">

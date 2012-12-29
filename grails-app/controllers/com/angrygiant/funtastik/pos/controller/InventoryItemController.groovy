@@ -12,6 +12,7 @@ class InventoryItemController {
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def sizesService
+    def inventoryService
 
     def index() {
         redirect(action: "list", params: params)
@@ -58,8 +59,9 @@ class InventoryItemController {
 
         def inventoryItemRecords = InventoryItemRecord.findAllByInventoryItem(inventoryItemInstance)
         int availableSizesCount = sizesService.getAvailableSizesForItem(inventoryItemInstance.id, inventoryItemInstance.itemType.id).size()
+        int totalQoh = inventoryService.getTotalQuantityOnHand(inventoryItemInstance)
 
-        [inventoryItemInstance: inventoryItemInstance, inventoryItemRecords: inventoryItemRecords, availableSizesCount: availableSizesCount]
+        [inventoryItemInstance: inventoryItemInstance, inventoryItemRecords: inventoryItemRecords, availableSizesCount: availableSizesCount, totalQoh: totalQoh]
     }
 
     def addSizeToItem() {

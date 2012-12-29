@@ -9,7 +9,6 @@
         <th>Color</th>
         <th>Wholesale</th>
         <th>Retail</th>
-    %{--<th>QOH</th>--}%
         <sec:ifAllGranted roles="ROLE_ADMIN">
             <th></th>
         </sec:ifAllGranted>
@@ -37,9 +36,6 @@
             <td>
                 ${formatNumber(number: inventoryItemInstance?.retailPrice, type: 'currency')}
             </td>
-        %{--<td>--}%
-        %{--${inventoryItemInstance?.qoh ?: '0'}--}%
-        %{--</td>--}%
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <td>
                     <a href="${createLink(action: 'delete', id: inventoryItemInstance?.id)}"
