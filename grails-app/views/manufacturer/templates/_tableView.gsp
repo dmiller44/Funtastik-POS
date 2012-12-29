@@ -5,6 +5,7 @@
         <th>Name</th>
         <th>Phone Number</th>
         <th>Web Site</th>
+        <th>&nbsp;</th>
     </tr>
     </thead>
     <tbody>
@@ -18,6 +19,14 @@
             </td>
             <td>
                 ${manufacturerInstance?.webSite ?: 'N/A'}
+            </td>
+            <td>
+                <g:if test="${!hasManufacturers.get(manufacturerInstance.id)}">
+                    <a href="${createLink(action: 'delete', id: manufacturerInstance?.id)}"
+                       onclick="return confirm('Do you really wish to delete ${manufacturerInstance?.name}?');">
+                        <i class="icon-remove"></i>
+                    </a>
+                </g:if>
             </td>
         </tr>
     </g:each>

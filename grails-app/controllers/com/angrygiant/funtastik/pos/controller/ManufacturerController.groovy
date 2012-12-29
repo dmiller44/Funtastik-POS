@@ -7,7 +7,9 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class ManufacturerController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
+
+    def inventoryService
 
     def index() {
         redirect(action: "list", params: params)
@@ -15,7 +17,14 @@ class ManufacturerController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [manufacturerInstanceList: Manufacturer.list(params), manufacturerInstanceTotal: Manufacturer.count()]
+        def manufacturers = Manufacturer.list(params)
+
+        Map hasManufacturers = [:]
+        for (Manufacturer manufacturer : manufacturers) {
+            hasManufacturers.put(manufacturer.id, inventoryService.haveManufacturersBeenUsed(manufacturer))
+        }
+
+        [manufacturerInstanceList: manufacturers, manufacturerInstanceTotal: Manufacturer.count(), hasManufacturers: hasManufacturers]
     }
 
     def create() {
@@ -89,7 +98,7 @@ class ManufacturerController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'manufacturer.label', default: 'Manufacturer'), params.id])
-            redirect(action: "show", id: params.id)
+            redirect(action: "list")
         }
     }
 }

@@ -3,6 +3,7 @@ package com.angrygiant.funtastik.pos.service
 import com.angrygiant.funtastik.pos.domain.Color
 import com.angrygiant.funtastik.pos.domain.InventoryItem
 import com.angrygiant.funtastik.pos.domain.InventoryItemRecord
+import com.angrygiant.funtastik.pos.domain.Manufacturer
 
 class InventoryService {
 
@@ -17,5 +18,9 @@ class InventoryService {
 
     boolean haveColorsBeenUsed(Color color) {
         return InventoryItem.findAllByColor(color).size() > 0
+    }
+
+    boolean haveManufacturersBeenUsed(Manufacturer manufacturer) {
+        return InventoryItem.findAllByManufacturer(manufacturer).size() > 0
     }
 }
