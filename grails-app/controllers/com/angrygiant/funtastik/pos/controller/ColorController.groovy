@@ -7,7 +7,9 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class ColorController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
+
+    def inventoryService
 
     def index() {
         redirect(action: "list", params: params)
@@ -30,7 +32,13 @@ class ColorController {
         def colors = criteria.list(query, max: params.max, offset: params.offset)
         def filters = [name: params.name]
 
-        def parameters = [colorInstanceList: colors, colorInstanceTotal: Color.count(), filters: filters]
+        Map isUsed = [:]
+
+        for (Color c : colors) {
+            isUsed.put(c.id, inventoryService.haveColorsBeenUsed(c))
+        }
+
+        def parameters = [colorInstanceList: colors, colorInstanceTotal: Color.count(), filters: filters, hasColors: isUsed]
 
         render(view: 'list', model: parameters)
     }
@@ -106,7 +114,7 @@ class ColorController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'color.label', default: 'Color'), params.id])
-            redirect(action: "show", id: params.id)
+            redirect(action: "list")
         }
     }
 }

@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>&nbsp;</th>
     </tr>
     </thead>
     <tbody>
@@ -9,6 +10,14 @@
         <tr>
             <td><g:link action="edit"
                         id="${colorInstance.id}">${fieldValue(bean: colorInstance, field: "name")}</g:link></td>
+            <td>
+                <g:if test="${!hasColors.get(colorInstance.id)}">
+                    <a href="${createLink(action: 'delete', id: colorInstance?.id)}"
+                       onclick="return confirm('Do you really wish to delete ${colorInstance?.name}?');">
+                        <i class="icon-remove"></i>
+                    </a>
+                </g:if>
+            </td>
         </tr>
     </g:each>
     </tbody>
