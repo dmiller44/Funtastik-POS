@@ -7,8 +7,10 @@
         </script>
     </sec:ifNotLoggedIn>
     <title>Funtastik | POS System</title>
-    <link rel="stylesheet" href="<g:resource dir='css/bootstrap' file='bootstrap.css'/>" type="text/css" charset="utf-8"/>
-    <link rel="stylesheet" href="<g:resource dir='css/funtastik' file='funtastik-bootstrap.css'/>" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="<g:resource dir='css/bootstrap' file='bootstrap.css'/>" type="text/css"
+          charset="utf-8"/>
+    <link rel="stylesheet" href="<g:resource dir='css/funtastik' file='funtastik-bootstrap.css'/>" type="text/css"
+          charset="utf-8"/>
 
     <script type="text/javascript" src="<g:resource dir='js' file='jquery-1.7.1.min.js'/>"></script>
     <script type="text/javascript" src="<g:resource dir='js/bootstrap' file='bootstrap.js'/>"></script>
@@ -27,17 +29,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="${createLink(uri: '/')}"><img class="tiny-navigation-logo" src="${g.resource(dir: 'images/funtastik-logos', file: 'newFuntastikLogo-white.png')}" alt="funtastik-logo" /> POS System</a>
+            <a class="brand" href="${createLink(uri: '/')}"><img class="tiny-navigation-logo"
+                                                                 src="${g.resource(dir: 'images/funtastik-logos', file: 'newFuntastikLogo-white.png')}"
+                                                                 alt="funtastik-logo"/> POS System</a>
+
             <form class="navbar-search pull-right">
                 <input type="text" class="search-query" placeholder="Search">
             </form>
+
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="">
                         <a href="#">Overview</a>
                     </li>
                     <li class="">
-                        <a href="#">Cash Register</a>
+                        <a href="${createLink(uri: '/cashregister/main')}">Cash Register</a>
                     </li>
                     <li class="">
                         <a href="#">Search</a>
