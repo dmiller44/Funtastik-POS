@@ -2,5 +2,7 @@ package com.angrygiant.funtastik.pos.controller
 
 class CashRegisterController {
 
-    def index() {}
+    def index() {
+        render(view: 'transaction')
+    }
 }

@@ -3,7 +3,7 @@
         Cash Register
     </li>
     <li id="newTransaction">
-        <a href="#">
+        <a href="${createLink(controller: 'cashRegister')}">
             <i class="icon-shopping-cart"></i>
             New Transaction
         </a>
