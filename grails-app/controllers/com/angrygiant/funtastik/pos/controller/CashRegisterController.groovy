@@ -40,10 +40,6 @@ class CashRegisterController {
     }
 
     def addItemToTransaction() {
-        println params.queryItem
-        println params.itemSize
-        println params.id
-
         if (!params.queryItem || !params.id || !params.itemSize) {
             log.error("No sku, transaction id or item size specified - going back")
             //set flash message for screen
@@ -79,6 +75,20 @@ class CashRegisterController {
 
         //TODO set success flash message
         redirect(action: 'index', id: params.id)
+    }
+
+    def removeItemFromTransaction() {
+        PosLineItem lineItem = PosLineItem.get(params.id)
+
+        if (!lineItem) {
+            log.error("Could not find line item with id ${params.id}")
+            //TODO set flash error
+            redirect(action: 'index', id: params.transactionId)
+        }
+
+        lineItem.delete(flush: true);
+
+        redirect(action: 'index', id: params.transactionId)
     }
 
     def ajaxGetSizes() {

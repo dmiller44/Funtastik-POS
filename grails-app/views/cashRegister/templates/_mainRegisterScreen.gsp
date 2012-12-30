@@ -65,7 +65,11 @@
                         <td>${lineItem.item.retailPrice}</td>
                         <td>${lineItem.size.name}</td>
                         <td>1</td>
-                        <td><i class="icon-remove"></i></td>
+                        <td>
+                            <a href="${createLink(action: 'removeItemFromTransaction', id: lineItem.id, params: ['transactionId': transaction.id])}">
+                                <i class="icon-remove"></i>
+                            </a>
+                        </td>
                     </tr>
                 </g:each>
             </g:if>
