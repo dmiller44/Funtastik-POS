@@ -207,6 +207,29 @@
     </div>
 </div>
 
+<div id="markTransactionLayawayModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="myModalLabel4">Are You Sure???</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineMarkTransactionLayaway" class="form-horizontal"
+              action="${createLink(action: 'markTransactionLayaway')}" method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <p>
+                Are you sure you want to LAYAWAY this transaction???
+            </p>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Layaway Transaction</button>
+                <a href="#" onclick="$('#markTransactionLayawayModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
         $("#queryItem").blur(function () {
