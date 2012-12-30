@@ -3,16 +3,22 @@
         <table class="table table-bordered" style="float:right;">
             <tbody>
             <tr>
+                <td>ID:</td>
+                %{--<td>0000000001</td>--}%
+                <td>${transaction.id}</td>
+            </tr>
+            <tr>
                 <td>Date:</td>
-                <td>12/29/2012 @ 9:46pm</td>
+                %{--<td>12/29/2012 @ 9:46pm</td>--}%
+                <td>${formatDate(format: 'MM/dd/yyyy @ hh:mm aa', date: transaction.transactionDate)}</td>
             </tr>
             <tr>
                 <td>Cashier:</td>
-                <td>${sec.loggedInUserInfo(field: 'username')}</td>
+                <td>${transaction.cashier?.username}</td>
             </tr>
             <tr>
                 <td>Status:</td>
-                <td>OPEN</td>
+                <td>${transaction.status?.id}</td>
             </tr>
             <tr>
                 <td>Customer:</td>
@@ -25,9 +31,11 @@
 
 <div class="row">
     <div class="span11" style="text-align: center;">
-        <g:form class="form-search" action="addNewItem">
-            <input name="queryItem" type="text" class="input-xlarge search-query" style="height: 30px;"
-                   placeholder="Add Item..."/>
+        <g:form class="form-search" action="addItemToTransaction">
+            <g:hiddenField name="id" value="${transaction.id}"/>
+            <input id="queryItem" name="queryItem" type="text" class="input-xlarge search-query" style="height: 30px;"
+                   placeholder="Enter SKU..."/>
+            <g:select name="itemSize" id="itemSize" from="${[]}" noSelection="['': ' -Enter SKU Code- ']"/>
             <button type="submit" class="btn">Add...</button>
         </g:form>
     </div>
@@ -42,27 +50,30 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Size</th>
                 <th>Quantity</th>
                 <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>55555</td>
-                <td>Flying V</td>
-                <td>Flying V Snowboard</td>
-                <td>$550.00</td>
-                <td>1</td>
-                <td><i class="icon-remove"></i></td>
-            </tr>
-            <tr>
-                <td>55555</td>
-                <td>Flying V</td>
-                <td>Flying V Snowboard</td>
-                <td>$550.00</td>
-                <td>1</td>
-                <td><i class="icon-remove"></i></td>
-            </tr>
+            <g:if test="${transaction.lineItems && transaction.lineItems?.size() > 0}">
+                <g:each in="${transaction.lineItems}" var="lineItem" status="i">
+                    <tr>
+                        <td>${lineItem.item.skuCode}</td>
+                        <td>${lineItem.item.name}</td>
+                        <td>${lineItem.item.description}</td>
+                        <td>${lineItem.item.retailPrice}</td>
+                        <td>${lineItem.size.name}</td>
+                        <td>1</td>
+                        <td><i class="icon-remove"></i></td>
+                    </tr>
+                </g:each>
+            </g:if>
+            <g:else>
+                <tr>
+                    <td colspan="6" style="text-align: center;">No Items on Transaction</td>
+                </tr>
+            </g:else>
             </tbody>
         </table>
     </div>
@@ -85,6 +96,7 @@
     <div class="span11">
         <div class="btn-toolbar">
             <div class="btn-group">
+                <button type="button" class="btn btn-warning">Cancel Transaction</button>
                 <button type="button" class="btn">Layaway Transaction</button>
                 <button type="button" class="btn">Mark as Pending</button>
                 <button type="button" class="btn">Add Transaction Discount</button>
@@ -93,3 +105,21 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $("#queryItem").blur(function () {
+            var skuCode = $('#queryItem').val();
+            var jqxhr = $.get('/funtastik-pos-system/cashRegister/ajaxGetSizes', { skuCode: skuCode },
+                    function (data) {
+                        var options = '';
+
+                        for (var i = 0; i < data.sizes.length; i++) {
+                            options += '<option value="' + data.sizes[i].id + '">' + data.sizes[i].name + '</option>';
+                        }
+                        $('#itemSize').html(options);
+                    }
+            )
+        });
+    });
+</script>

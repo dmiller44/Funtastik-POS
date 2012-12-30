@@ -21,6 +21,7 @@ class PosTransaction {
         customer(nullable: true)
         transactionDate(nullable: false)
         transactionDiscount()
+        transactionStatus(nullable: false, blank: false)
     }
 
     static transients = ['status']
