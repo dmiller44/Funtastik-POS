@@ -126,6 +126,26 @@ class CashRegisterController {
         redirect(action: 'index', id: transaction.id)
     }
 
+    def markTransactionOpen() {
+        PosTransaction transaction = PosTransaction.get(params.transactionId)
+
+        transaction.status = TransactionStatus.OPEN
+
+        transaction.save(flush: true)
+
+        redirect(action: 'index', id: transaction.id)
+    }
+
+    def markTransactionCancelled() {
+        PosTransaction transaction = PosTransaction.get(params.transactionId)
+
+        transaction.status = TransactionStatus.CANCELLED
+
+        transaction.save(flush: true)
+
+        redirect(action: 'index', id: transaction.id)
+    }
+
     def ajaxGetSizes() {
         log.warn("looking up sizes for SKU: " + params.skuCode)
         InventoryItem inventoryItem = InventoryItem.findBySkuCode(params.skuCode)

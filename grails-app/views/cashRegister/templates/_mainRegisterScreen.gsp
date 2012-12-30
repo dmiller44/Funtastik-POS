@@ -104,13 +104,7 @@
     <div class="span11">
         <div class="btn-toolbar">
             <div class="btn-group">
-                <button type="button" class="btn btn-warning">Cancel Transaction</button>
-                <button type="button" class="btn">Layaway Transaction</button>
-                <button type="button" class="btn"
-                        onclick="$('#markTransactionPendingModal').modal('show');">Mark as Pending</button>
-                <button type="button" class="btn"
-                        onclick="$('#transactionDiscountModal').modal('show');">Add Transaction Discount</button>
-                <button type="button" class="btn btn-success">Add Payment Entry</button>
+                <g:render template="templates/buttonGroup${transaction.status.id}"/>
             </div>
         </div>
     </div>
@@ -144,6 +138,29 @@
     </div>
 </div>
 
+<div id="markTransactionOpenModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="myModalLabel2">Are You Sure???</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineMarkTransactionOpen" class="form-horizontal"
+              action="${createLink(action: 'markTransactionOpen')}" method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <p>
+                Are you sure you want to reopen this transaction?
+            </p>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Mark as OPEN</button>
+                <a href="#" onclick="$('#markTransactionPendingModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div id="markTransactionPendingModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
@@ -161,6 +178,29 @@
 
             <div class="form-actions">
                 <button class="btn btn-primary">Mark as PENDING</button>
+                <a href="#" onclick="$('#markTransactionPendingModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="markTransactionCancelledModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="myModalLabel3">Are You Sure???</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineMarkTransactionCancelled" class="form-horizontal"
+              action="${createLink(action: 'markTransactionCancelled')}" method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <p>
+                Are you sure you want to cancel this transaction???
+            </p>
+
+            <div class="form-actions">
+                <button class="btn btn-danger">Cancel Transaction</button>
                 <a href="#" onclick="$('#markTransactionPendingModal').modal('hide');" class="btn">Close</a>
             </div>
         </form>
