@@ -62,7 +62,7 @@
                         <td>${lineItem.item.skuCode}</td>
                         <td>${lineItem.item.name}</td>
                         <td>${lineItem.item.description}</td>
-                        <td>${lineItem.item.retailPrice}</td>
+                        <td>${formatNumber(number: lineItem.item.retailPrice, type: 'currency')}</td>
                         <td>${lineItem.size.name}</td>
                         <td>1</td>
                         <td>
@@ -75,7 +75,7 @@
             </g:if>
             <g:else>
                 <tr>
-                    <td colspan="6" style="text-align: center;">No Items on Transaction</td>
+                    <td colspan="7" style="text-align: center;">No Items on Transaction</td>
                 </tr>
             </g:else>
             </tbody>
@@ -86,12 +86,16 @@
 <div class="row" style="text-align: right;">
     <div class="span11">
         <dl class="table-display">
+            <g:if test="${transaction.transactionDiscount > 0}">
+                <dt>Discount</dt>
+                <dt>${formatNumber(number: transaction.transactionDiscount, type: 'percent')}</dt>
+            </g:if>
             <dt>Subtotal</dt>
-            <dd>$1100.00</dd>
+            <dd>${formatNumber(number: subtotal, type: 'currency')}</dd>
             <dt>Tax</dt>
-            <dd>$66.00</dd>
+            <dd>${formatNumber(number: salesTax, type: 'currency')}</dd>
             <dt>Total</dt>
-            <dd>$1166.00</dd>
+            <dd>${formatNumber(number: (subtotal + salesTax), type: 'currency')}</dd>
         </dl>
     </div>
 </div>

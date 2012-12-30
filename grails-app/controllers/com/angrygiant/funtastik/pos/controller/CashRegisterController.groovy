@@ -14,6 +14,7 @@ class CashRegisterController {
 
     def springSecurityService
     def sizesService
+    def cashRegisterService
 
     def index() {
         PosTransaction transaction
@@ -36,7 +37,10 @@ class CashRegisterController {
             }
         }
 
-        render(view: 'transaction', model: [transaction: transaction])
+        double subtotal = cashRegisterService.calculateSubtotalForTransaction(transaction)
+        double salesTax = cashRegisterService.calculateSalesTaxForTransaction(transaction)
+
+        render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax])
     }
 
     def addItemToTransaction() {
