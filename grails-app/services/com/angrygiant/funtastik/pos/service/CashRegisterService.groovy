@@ -33,6 +33,12 @@ class CashRegisterService {
             }
         }
 
+        if (transaction.transactionDiscount > 0) {
+            double discountAmount = totalToTax * transaction.transactionDiscount
+
+            totalToTax -= discountAmount
+        }
+
         salesTax = totalToTax * PA_SALES_TAX
 
         return salesTax

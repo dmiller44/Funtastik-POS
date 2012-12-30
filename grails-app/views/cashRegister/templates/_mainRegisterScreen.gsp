@@ -88,7 +88,7 @@
         <dl class="table-display">
             <g:if test="${transaction.transactionDiscount > 0}">
                 <dt>Discount</dt>
-                <dt>${formatNumber(number: transaction.transactionDiscount, type: 'percent')}</dt>
+                <dd>${formatNumber(number: transaction.transactionDiscount, type: 'percent')}</dd>
             </g:if>
             <dt>Subtotal</dt>
             <dd>${formatNumber(number: subtotal, type: 'currency')}</dd>
@@ -107,10 +107,39 @@
                 <button type="button" class="btn btn-warning">Cancel Transaction</button>
                 <button type="button" class="btn">Layaway Transaction</button>
                 <button type="button" class="btn">Mark as Pending</button>
-                <button type="button" class="btn">Add Transaction Discount</button>
+                <button type="button" class="btn"
+                        onclick="$('#transactionDiscountModal').modal('show');">Add Transaction Discount</button>
                 <button type="button" class="btn btn-success">Add Payment Entry</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="transactionDiscountModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="myModalLabel">Set Transaction Discount</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineTransactionDiscount" class="form-horizontal"
+              action="${createLink(action: 'addTransactionDiscount')}" method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <div class="control-group">
+                <label class="control-label" for="transactionDiscount">Discount</label>
+
+                <div class="controls">
+                    <g:textField class="input-mini" id="transactionDiscount" name="transactionDiscount"
+                                 value="${formatNumber(number: transaction.transactionDiscount * 100)}"/>%
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <a href="#" onclick="$('#transactionDiscountModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
     </div>
 </div>
 

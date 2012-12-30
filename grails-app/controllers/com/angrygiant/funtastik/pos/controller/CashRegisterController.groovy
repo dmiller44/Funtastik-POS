@@ -95,6 +95,27 @@ class CashRegisterController {
         redirect(action: 'index', id: params.transactionId)
     }
 
+    def addTransactionDiscount() {
+        PosTransaction transaction = PosTransaction.get(params.transactionId)
+
+        double discount = Double.parseDouble(params.transactionDiscount)
+
+        if (discount < 1 && discount > 0) {
+            log.warn("You can add values > 1...assuming it's 'whole' equivalent, in this case, ${discount * 100}%")
+            transaction.transactionDiscount = discount
+            transaction.save(flush: true)
+        } else if (discount > 100 || discount < 0) {
+            log.error("Invalid discount amount! Ignoring...")
+            //TODO set flash error message
+        } else {
+            discount = discount / 100
+            transaction.transactionDiscount = discount
+            transaction.save(flush: true)
+        }
+
+        redirect(action: 'index', id: params.transactionId)
+    }
+
     def ajaxGetSizes() {
         log.warn("looking up sizes for SKU: " + params.skuCode)
         InventoryItem inventoryItem = InventoryItem.findBySkuCode(params.skuCode)
