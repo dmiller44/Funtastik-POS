@@ -423,4 +423,6 @@ databaseChangeLog = {
     }
 
     include file: 'addingPosSystemObjects.groovy'
+
+	include file: 'fixingPosPaymentEntryRelationships.groovy'
 }

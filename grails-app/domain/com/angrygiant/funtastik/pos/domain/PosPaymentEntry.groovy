@@ -7,6 +7,8 @@ import java.sql.Timestamp
 
 class PosPaymentEntry {
 
+    static belongsTo = [transaction: PosTransaction]
+
     String paymentMethod = "CASH"
     double amount = 0.0
     String referenceNumber
