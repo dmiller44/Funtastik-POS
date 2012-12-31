@@ -1,7 +1,6 @@
 package com.angrygiant.funtastik.pos.controller
 
 import com.angrygiant.funtastik.pos.domain.InventoryItem
-import com.angrygiant.funtastik.pos.domain.InventoryItemRecord
 import com.angrygiant.funtastik.pos.domain.PosLineItem
 import com.angrygiant.funtastik.pos.domain.PosPaymentEntry
 import com.angrygiant.funtastik.pos.domain.PosTransaction
