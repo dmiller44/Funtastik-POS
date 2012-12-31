@@ -17,6 +17,7 @@ class CashRegisterController {
     def springSecurityService
     def sizesService
     def cashRegisterService
+    def inventoryService
 
     def index() {
         PosTransaction transaction
@@ -46,7 +47,11 @@ class CashRegisterController {
         //calculate if transaction should be closed.
         if (totalDue <= 0 && transaction?.payments?.size() > 0 && transaction?.lineItems?.size() > 0) {
             transaction.status = TransactionStatus.COMPLETED
-            transaction.save(flush: true)
+            if (transaction.save(flush: true)) {
+                for (PosLineItem item : transaction.lineItems) {
+                    inventoryService.adjustQuantityForItem(item.item, item.size, item.quantity)
+                }
+            }
         }
 
         render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax, totalDue: totalDue])

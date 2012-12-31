@@ -6,6 +6,7 @@ import com.angrygiant.funtastik.pos.domain.InventoryItem
 import com.angrygiant.funtastik.pos.domain.InventoryItemRecord
 import com.angrygiant.funtastik.pos.domain.ItemType
 import com.angrygiant.funtastik.pos.domain.Manufacturer
+import com.angrygiant.funtastik.pos.domain.Size
 
 class InventoryService {
 
@@ -35,5 +36,17 @@ class InventoryService {
     boolean haveDepartmentsBeenUsed(Department department) {
 
         return InventoryItem.executeQuery("SELECT inventoryItem FROM InventoryItem inventoryItem JOIN inventoryItem.departments as departments WHERE departments.id = ${department.id}").size() > 0
+    }
+
+    void adjustQuantityForItem(InventoryItem item, Size size, int quantity) {
+        InventoryItemRecord itemRecord = InventoryItemRecord.findByInventoryItemAndSize(item, size)
+
+        if (!itemRecord) {
+            log.error("No item record exists for item ${item.skuCode} and size ${size.name}")
+            return
+        }
+
+        itemRecord.qoh -= quantity
+        itemRecord.save(flush: true)
     }
 }
