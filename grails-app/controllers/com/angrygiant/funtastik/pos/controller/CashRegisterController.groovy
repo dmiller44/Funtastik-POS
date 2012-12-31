@@ -98,7 +98,7 @@ class CashRegisterController {
             return
         }
 
-        PosLineItem lineItem = PosLineItem.findByItemAndSize(inventoryItem, size)
+        PosLineItem lineItem = PosLineItem.findByItemAndSizeAndTransaction(inventoryItem, size, transaction)
 
         if (!lineItem) {
             lineItem = new PosLineItem()
