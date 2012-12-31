@@ -8,4 +8,3 @@
         onclick="$('#markTransactionOpenModal').modal('show');">Reopen Transaction</button>
 <button type="button" class="btn"
         onclick="$('#transactionDiscountModal').modal('show');">Add Transaction Discount</button>
-<button type="button" class="btn btn-success">Add Payment Entry</button>

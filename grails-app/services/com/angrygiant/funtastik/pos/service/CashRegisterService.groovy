@@ -1,6 +1,7 @@
 package com.angrygiant.funtastik.pos.service
 
 import com.angrygiant.funtastik.pos.domain.PosLineItem
+import com.angrygiant.funtastik.pos.domain.PosPaymentEntry
 import com.angrygiant.funtastik.pos.domain.PosTransaction
 
 class CashRegisterService {
@@ -42,5 +43,17 @@ class CashRegisterService {
         salesTax = totalToTax * PA_SALES_TAX
 
         return salesTax
+    }
+
+    double calculateTotalAmountDueForTransaction(PosTransaction transaction) {
+        double totalPrice = calculateSubtotalForTransaction(transaction) + calculateSalesTaxForTransaction(transaction)
+
+        double totalDue = totalPrice
+
+        for (PosPaymentEntry entry : transaction.payments) {
+            totalDue -= entry.amount
+        }
+
+        return totalDue
     }
 }

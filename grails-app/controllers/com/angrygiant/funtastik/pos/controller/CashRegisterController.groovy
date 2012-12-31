@@ -3,8 +3,10 @@ package com.angrygiant.funtastik.pos.controller
 import com.angrygiant.funtastik.pos.domain.InventoryItem
 import com.angrygiant.funtastik.pos.domain.InventoryItemRecord
 import com.angrygiant.funtastik.pos.domain.PosLineItem
+import com.angrygiant.funtastik.pos.domain.PosPaymentEntry
 import com.angrygiant.funtastik.pos.domain.PosTransaction
 import com.angrygiant.funtastik.pos.domain.Size
+import com.angrygiant.funtastik.pos.domain.transaction.PaymentMethods
 import com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus
 import grails.converters.JSON
 
@@ -39,8 +41,9 @@ class CashRegisterController {
 
         double subtotal = cashRegisterService.calculateSubtotalForTransaction(transaction)
         double salesTax = cashRegisterService.calculateSalesTaxForTransaction(transaction)
+        double totalDue = cashRegisterService.calculateTotalAmountDueForTransaction(transaction)
 
-        render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax])
+        render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax, totalDue: totalDue])
     }
 
     def addItemToTransaction() {
@@ -166,6 +169,40 @@ class CashRegisterController {
         def transactions = PosTransaction.findAllByTransactionStatus(TransactionStatus.LAYAWAY.id)
 
         render(view: 'lookupTransactions', model: [transactions: transactions])
+    }
+
+    def addPaymentToTransaction() {
+        PosTransaction transaction = PosTransaction.get(params.transactionId)
+
+        double amount = Double.parseDouble(params.paymentAmount)
+        String method = params.paymentMethod
+        String refNumber = params.paymentReferenceNumber
+
+        PosPaymentEntry entry = new PosPaymentEntry()
+        entry.amount = amount
+        entry.method = PaymentMethods.byId(method)
+        entry.referenceNumber = refNumber
+        entry.paymentDate = new Timestamp(new Date().time)
+        entry.cashier = springSecurityService.currentUser
+        entry.transaction = transaction
+
+        entry.save(flush: true)
+
+        redirect(action: 'index', id: transaction.id)
+    }
+
+    def removePaymentEntryFromTransaction() {
+        PosPaymentEntry paymentEntry = PosPaymentEntry.get(params.id)
+
+        if (!paymentEntry) {
+            log.error("Could not find entry with id ${params.id}")
+            //TODO set flash error
+            redirect(action: 'index', id: params.transactionId)
+        }
+
+        paymentEntry.delete(flush: true);
+
+        redirect(action: 'index', id: params.transactionId)
     }
 
     def ajaxGetSizes() {

@@ -98,6 +98,8 @@
             <dd>${formatNumber(number: salesTax, type: 'currency')}</dd>
             <dt>Total</dt>
             <dd>${formatNumber(number: (subtotal + salesTax), type: 'currency')}</dd>
+            <dt style="color: red;">Total Due</dt>
+            <dd style="color: red;">${formatNumber(number: totalDue, type: 'currency')}</dd>
         </dl>
     </div>
 </div>
@@ -109,6 +111,106 @@
                 <g:render template="templates/buttonGroup${transaction.status.id}"/>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="row" style="padding-top: 25px;">
+    <div class="span11">
+        <table class="table table-bordered table-striped">
+            <caption
+                    style="font-weight: bolder; font-size: 16px; margin-bottom: 10px;">Applied Payment Entries</caption>
+            <thead>
+            <tr>
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Cashier</th>
+                <th>Ref. Number</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:if test="${transaction.payments && transaction.payments?.size() > 0}">
+                <g:each in="${transaction.payments}" var="payment" status="i">
+                    <tr>
+                        <td>${formatDate(format: 'MM/dd/yyyy @ hh:mm aa', date: payment.paymentDate)}</td>
+                        <td>${formatNumber(number: payment.amount, type: 'currency')}</td>
+                        <td>${payment.paymentMethod}</td>
+                        <td>${payment.cashier?.username}</td>
+                        <td>${payment.referenceNumber}</td>
+                        <td>
+                            <g:if test="${transaction.status == com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.OPEN || transaction.status == com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.LAYAWAY}">
+                                <a href="${createLink(action: 'removePaymentEntryFromTransaction', id: payment.id, params: ['transactionId': transaction.id])}">
+                                    <i class="icon-remove"></i>
+                                </a>
+                            </g:if>
+                        </td>
+                    </tr>
+                </g:each>
+            </g:if>
+            <g:else>
+                <tr>
+                    <td colspan="6" style="text-align: center;">No Payments Entered</td>
+                </tr>
+            </g:else>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row" style="text-align: center;">
+    <div class="span11">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <g:render template="templates/buttonGroupPayment"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="transactionPaymentEntryModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="modalLabel">Add Payment Entry</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineTransactionPaymentEntry" class="form-horizontal"
+              action="${createLink(action: 'addPaymentToTransaction')}" method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <div class="control-group">
+                <label class="control-label" for="paymentMethod">Method</label>
+
+                <div class="controls">
+                    <g:select name="paymentMethod" id="paymentMethod"
+                              from="${com.angrygiant.funtastik.pos.domain.transaction.PaymentMethods.values()*.id}"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="paymentAmount">Amount</label>
+
+                <div class="controls">
+                    $<g:textField class="input-medium" id="paymentAmount" name="paymentAmount"
+                                  value="0"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="paymentReferenceNumber">Reference #</label>
+
+                <div class="controls">
+                    <g:textField class="input-large" id="paymentReferenceNumber" name="paymentReferenceNumber"
+                                 value=""/>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <a href="#" onclick="$('#transactionPaymentEntryModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
     </div>
 </div>
 
