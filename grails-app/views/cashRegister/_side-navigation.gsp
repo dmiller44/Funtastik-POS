@@ -9,13 +9,13 @@
         </a>
     </li>
     <li id="lookupPending">
-        <a href="#">
+        <a href="${createLink(controller: 'cashRegister', action: 'getPendingTransactions')}">
             <i class="icon-time"></i>
             Lookup Pending
         </a>
     </li>
     <li id="lookupLayaway">
-        <a href="#">
+        <a href="${createLink(controller: 'cashRegister', action: 'getLayawayTransactions')}">
             <i class="icon-gift"></i>
             Lookup Layaway
         </a>

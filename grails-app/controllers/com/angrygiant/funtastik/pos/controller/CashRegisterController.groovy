@@ -156,6 +156,18 @@ class CashRegisterController {
         redirect(action: 'index', id: transaction.id)
     }
 
+    def getPendingTransactions() {
+        def transactions = PosTransaction.findAllByTransactionStatus(TransactionStatus.PENDING.id)
+
+        render(view: 'lookupTransactions', model: [transactions: transactions])
+    }
+
+    def getLayawayTransactions() {
+        def transactions = PosTransaction.findAllByTransactionStatus(TransactionStatus.LAYAWAY.id)
+
+        render(view: 'lookupTransactions', model: [transactions: transactions])
+    }
+
     def ajaxGetSizes() {
         log.warn("looking up sizes for SKU: " + params.skuCode)
         InventoryItem inventoryItem = InventoryItem.findBySkuCode(params.skuCode)

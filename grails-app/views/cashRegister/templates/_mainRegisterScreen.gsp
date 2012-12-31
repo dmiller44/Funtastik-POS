@@ -155,7 +155,7 @@
 
             <div class="form-actions">
                 <button class="btn btn-primary">Mark as OPEN</button>
-                <a href="#" onclick="$('#markTransactionPendingModal').modal('hide');" class="btn">Close</a>
+                <a href="#" onclick="$('#markTransactionOpenModal').modal('hide');" class="btn">Close</a>
             </div>
         </form>
     </div>
@@ -201,7 +201,7 @@
 
             <div class="form-actions">
                 <button class="btn btn-danger">Cancel Transaction</button>
-                <a href="#" onclick="$('#markTransactionPendingModal').modal('hide');" class="btn">Close</a>
+                <a href="#" onclick="$('#markTransactionCancelledModal').modal('hide');" class="btn">Close</a>
             </div>
         </form>
     </div>
