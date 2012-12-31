@@ -98,8 +98,14 @@
             <dd>${formatNumber(number: salesTax, type: 'currency')}</dd>
             <dt>Total</dt>
             <dd>${formatNumber(number: (subtotal + salesTax), type: 'currency')}</dd>
-            <dt style="color: red;">Total Due</dt>
-            <dd style="color: red;">${formatNumber(number: totalDue, type: 'currency')}</dd>
+            <g:if test="${totalDue > 0}">
+                <dt style="color: red;">Total Due</dt>
+                <dd style="color: red;">${formatNumber(number: totalDue, type: 'currency')}</dd>
+            </g:if>
+            <g:else>
+                <dt style="color: green;">Change</dt>
+                <dd style="color: green;">${formatNumber(number: totalDue * -1, type: 'currency')}</dd>
+            </g:else>
         </dl>
     </div>
 </div>
