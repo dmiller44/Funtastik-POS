@@ -31,7 +31,7 @@
                 <td>${transaction.cashier.username}</td>
                 <td>
                     <a class="btn btn-success"
-                       href="${createLink(controller: 'cashRegister', action: 'index', id: transaction.id)}">Open</a>
+                       href="${createLink(controller: 'cashRegister', action: 'index', id: transaction.id)}">Show</a>
                     <button class="btn btn-warning" onclick="showCancelModal('${transaction.id}');">Cancel</button>
                 </td>
             </tr>
