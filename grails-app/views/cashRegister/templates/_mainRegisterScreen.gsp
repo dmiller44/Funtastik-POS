@@ -66,9 +66,11 @@
                         <td>${lineItem.size.name}</td>
                         <td>1</td>
                         <td>
-                            <a href="${createLink(action: 'removeItemFromTransaction', id: lineItem.id, params: ['transactionId': transaction.id])}">
-                                <i class="icon-remove"></i>
-                            </a>
+                            <g:if test="${transaction.status == com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.OPEN || transaction.status == com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.LAYAWAY}">
+                                <a href="${createLink(action: 'removeItemFromTransaction', id: lineItem.id, params: ['transactionId': transaction.id])}">
+                                    <i class="icon-remove"></i>
+                                </a>
+                            </g:if>
                         </td>
                     </tr>
                 </g:each>
