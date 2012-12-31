@@ -31,13 +31,16 @@
 
 <div class="row">
     <div class="span11" style="text-align: center;">
-        <g:form class="form-search" action="addItemToTransaction">
-            <g:hiddenField name="id" value="${transaction.id}"/>
-            <input id="queryItem" name="queryItem" type="text" class="input-xlarge search-query" style="height: 30px;"
-                   placeholder="Enter SKU..."/>
-            <g:select name="itemSize" id="itemSize" from="${[]}" noSelection="['': ' -Enter SKU Code- ']"/>
-            <button type="submit" class="btn">Add...</button>
-        </g:form>
+        <g:if test="${transaction.status != com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.COMPLETED}">
+            <g:form class="form-search" action="addItemToTransaction">
+                <g:hiddenField name="id" value="${transaction.id}"/>
+                <input id="queryItem" name="queryItem" type="text" class="input-xlarge search-query"
+                       style="height: 30px;"
+                       placeholder="Enter SKU..."/>
+                <g:select name="itemSize" id="itemSize" from="${[]}" noSelection="['': ' -Enter SKU Code- ']"/>
+                <button type="submit" class="btn">Add...</button>
+            </g:form>
+        </g:if>
     </div>
 </div>
 
@@ -168,7 +171,9 @@
     <div class="span11">
         <div class="btn-toolbar">
             <div class="btn-group">
-                <g:render template="templates/buttonGroupPayment"/>
+                <g:if test="${transaction.status != com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.COMPLETED}">
+                    <g:render template="templates/buttonGroupPayment"/>
+                </g:if>
             </div>
         </div>
     </div>

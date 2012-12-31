@@ -43,6 +43,12 @@ class CashRegisterController {
         double salesTax = cashRegisterService.calculateSalesTaxForTransaction(transaction)
         double totalDue = cashRegisterService.calculateTotalAmountDueForTransaction(transaction)
 
+        //calculate if transaction should be closed.
+        if (totalDue <= 0 && transaction?.payments?.size() > 0 && transaction?.lineItems?.size() > 0) {
+            transaction.status = TransactionStatus.COMPLETED
+            transaction.save(flush: true)
+        }
+
         render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax, totalDue: totalDue])
     }
 
