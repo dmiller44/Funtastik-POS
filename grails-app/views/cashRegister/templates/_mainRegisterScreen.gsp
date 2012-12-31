@@ -67,7 +67,7 @@
                         <td>${lineItem.item.description}</td>
                         <td>${formatNumber(number: lineItem.item.retailPrice, type: 'currency')}</td>
                         <td>${lineItem.size.name}</td>
-                        <td>1</td>
+                        <td onclick="showQuantityModal('${lineItem.id}', '${lineItem.quantity}');">${lineItem.quantity}</td>
                         <td>
                             <g:if test="${transaction.status == com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.OPEN || transaction.status == com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus.LAYAWAY}">
                                 <a href="${createLink(action: 'removeItemFromTransaction', id: lineItem.id, params: ['transactionId': transaction.id])}">
@@ -344,6 +344,42 @@
         </form>
     </div>
 </div>
+
+<div id="editQohModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+
+        <h3 id="myModalLabel5">Edit Quantity</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineEditQoh" class="form-horizontal" action="${createLink(action: 'addQuantityToLineItem')}"
+              method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <g:hiddenField name="lineItemId" value="-1"/>
+            <div class="control-group">
+                <label class="control-label" for="quantity">Quantity</label>
+
+                <div class="controls">
+                    <g:textField id="quantity" name="quantity" value="-1"/>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <a href="#" onclick="$('#editQohModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showQuantityModal(lineItemId, quantity) {
+        $('#lineItemId').val(lineItemId);
+        $('#quantity').val(quantity);
+        $('#editQohModal').modal('show');
+    }
+</script>
 
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {

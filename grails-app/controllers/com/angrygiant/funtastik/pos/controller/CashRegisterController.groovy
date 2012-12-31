@@ -57,6 +57,21 @@ class CashRegisterController {
         render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax, totalDue: totalDue])
     }
 
+    def addQuantityToLineItem() {
+        PosLineItem lineItem = PosLineItem.get(params.lineItemId)
+
+        if (!lineItem) {
+            log.error("Could not adjust quantity for line item...not found")
+            redirect(action: 'index', id: params.transactionId)
+            return
+        }
+
+        lineItem.quantity = Integer.parseInt(params.quantity)
+        lineItem.save(flush: true)
+
+        redirect(action: 'index', id: params.transactionId)
+    }
+
     def addItemToTransaction() {
         if (!params.queryItem || !params.id || !params.itemSize) {
             log.error("No sku, transaction id or item size specified - going back")
@@ -83,13 +98,20 @@ class CashRegisterController {
             return
         }
 
-        PosLineItem lineItem = new PosLineItem()
-        lineItem.item = inventoryItem
-        lineItem.size = size
-        lineItem.quantity = 1
-        lineItem.transaction = transaction
+        PosLineItem lineItem = PosLineItem.findByItemAndSize(inventoryItem, size)
 
-        lineItem.save(flush: true)
+        if (!lineItem) {
+            lineItem = new PosLineItem()
+            lineItem.item = inventoryItem
+            lineItem.size = size
+            lineItem.quantity = 1
+            lineItem.transaction = transaction
+
+            lineItem.save(flush: true)
+        } else {
+            lineItem.quantity++
+            lineItem.save(flush: true)
+        }
 
         //TODO set success flash message
         redirect(action: 'index', id: params.id)
