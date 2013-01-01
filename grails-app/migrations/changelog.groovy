@@ -424,5 +424,7 @@ databaseChangeLog = {
 
     include file: 'addingPosSystemObjects.groovy'
 
-	include file: 'fixingPosPaymentEntryRelationships.groovy'
+    include file: 'fixingPosPaymentEntryRelationships.groovy'
+
+    include file: 'teamMemberFieldOnCustomer.groovy'
 }
