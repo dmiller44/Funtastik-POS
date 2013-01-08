@@ -22,65 +22,59 @@
 <!-- Navbar
     ================================================== -->
 <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="${createLink(uri: '/')}"><img class="tiny-navigation-logo"
-                                                                 src="${g.resource(dir: 'images/funtastik-logos', file: 'newFuntastikLogo-white.png')}"
-                                                                 alt="funtastik-logo"/> POS System</a>
+    <div class="navbar-inner" style="padding-left: 25%">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="${createLink(uri: '/')}"><img class="tiny-navigation-logo"
+                                                             src="${g.resource(dir: 'images/funtastik-logos', file: 'newFuntastikLogo-black.png')}"
+                                                             alt="funtastik-logo"/> POS System</a>
 
-            <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="Search">
-            </form>
-
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="">
-                        <a href="#">Overview</a>
+        <div class="nav-collapse">
+            <ul class="nav">
+                <li class="">
+                    <a href="#">Overview</a>
+                </li>
+                <li class="">
+                    <a href="${createLink(uri: '/cashregister/main')}">Cash Register</a>
+                </li>
+                <li class="">
+                    <a href="#">Search</a>
+                </li>
+                <li class="divider-vertical"></li>
+                <li class="">
+                    <a href="#">Help</a>
+                </li>
+                <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <li class="dropdown">
+                        <a href="#"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown">
+                            Administration
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="">
+                                <a href="#">Customer Management</a>
+                            </li>
+                            <li class="">
+                                <a href="#">Transaction Management</a>
+                            </li>
+                            <li class="">
+                                <a href="${createLink(uri: '/admin/inventory')}">Inventory Management</a>
+                            </li>
+                            <li class="">
+                                <a href="#">Security Management</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="">
-                        <a href="${createLink(uri: '/cashregister/main')}">Cash Register</a>
-                    </li>
-                    <li class="">
-                        <a href="#">Search</a>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li class="">
-                        <a href="#">Help</a>
-                    </li>
-                    <sec:ifAllGranted roles="ROLE_ADMIN">
-                        <li class="dropdown">
-                            <a href="#"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown">
-                                Administration
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="">
-                                    <a href="#">Customer Management</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Transaction Management</a>
-                                </li>
-                                <li class="">
-                                    <a href="${createLink(uri: '/admin/inventory')}">Inventory Management</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Security Management</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </sec:ifAllGranted>
-                    <li class="">
-                        <a href="${createLink(controller: 'logout')}">Logout</a>
-                    </li>
-                </ul>
-            </div>
+                </sec:ifAllGranted>
+                <li class="">
+                    <a href="${createLink(controller: 'logout')}">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

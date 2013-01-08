@@ -22,7 +22,8 @@
             </tr>
             <tr>
                 <td>Customer:</td>
-                <td><button type="button" class="btn btn-info">Add Customer</button></td>
+                <td><button type="button" class="btn btn-info"
+                            onclick="$('#addCustomerModal').modal('show');">Add Customer</button></td>
             </tr>
             </tbody>
         </table>
@@ -181,7 +182,7 @@
 
 <div id="transactionPaymentEntryModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="modalLabel">Add Payment Entry</h3>
     </div>
@@ -227,7 +228,7 @@
 
 <div id="transactionDiscountModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="myModalLabel">Set Transaction Discount</h3>
     </div>
@@ -255,7 +256,7 @@
 
 <div id="markTransactionOpenModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="myModalLabel2">Are You Sure???</h3>
     </div>
@@ -278,7 +279,7 @@
 
 <div id="markTransactionPendingModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="myModalLabel1">Are You Sure???</h3>
     </div>
@@ -301,7 +302,7 @@
 
 <div id="markTransactionCancelledModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="myModalLabel3">Are You Sure???</h3>
     </div>
@@ -324,7 +325,7 @@
 
 <div id="markTransactionLayawayModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="myModalLabel4">Are You Sure???</h3>
     </div>
@@ -347,7 +348,7 @@
 
 <div id="editQohModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">?</button>
 
         <h3 id="myModalLabel5">Edit Quantity</h3>
     </div>
@@ -368,6 +369,36 @@
             <div class="form-actions">
                 <button class="btn btn-primary">Save Changes</button>
                 <a href="#" onclick="$('#editQohModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="addCustomerModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">?</button>
+
+        <h3 id="customerModalLabel">Add Customer to Transaction</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineCustomerModal" class="form-horizontal"
+              action="${createLink(action: 'addCustomerToTransaction')}"
+              method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <g:hiddenField name="customerId" value=""/>
+            <div class="control-group">
+                <label class="control-label" for="customerName">Customer Name</label>
+
+                <div class="controls">
+                    <g:textField id="customerName" name="customerName" value="" class="input-xlarge"
+                                 autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <a href="#" onclick="$('#addCustomerModal').modal('hide');" class="btn">Close</a>
             </div>
         </form>
     </div>
@@ -395,6 +426,17 @@
                         $('#itemSize').html(options);
                     }
             )
+        });
+
+        $("#customerName").typeahead({
+            source: function (query, process) {
+                $.post('${createLink(action: "ajaxGetCustomers")}', { q: query, limit: 8 }, function (data) {
+                    process(data);
+                });
+            },
+            updater: function (item) {
+                alert(item);
+            }
         });
     });
 </script>

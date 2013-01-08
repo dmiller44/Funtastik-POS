@@ -251,4 +251,10 @@ class CashRegisterController {
         def sizesList = ["sizes": sizes]
         render sizesList as JSON
     }
+
+    def ajaxGetCustomers() {
+        def list = ["Dan Miller", "Aaron Wilson", "Joan Wilson", "Zachary Miller", "Bridget Miller"]
+
+        render list as JSON
+    }
 }
