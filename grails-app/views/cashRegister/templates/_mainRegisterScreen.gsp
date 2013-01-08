@@ -391,7 +391,17 @@
                 <label class="control-label" for="customerName">Customer Name</label>
 
                 <div class="controls">
-                    <g:textField id="customerName" name="customerName" value="" class="input-xlarge"
+                    <g:textField id="customerName" name="customerName" value="" class="input-large"
+                                 autocomplete="off"/>&nbsp;&nbsp;&nbsp;<a href="#"
+                                                                          onclick="$('#createNewFields').show('show');">Create New...</a>
+                </div>
+            </div>
+
+            <div class="control-group hide" id="createNewFields">
+                <label class="control-label" for="phoneNumber">Phone Number</label>
+
+                <div class="controls">
+                    <g:textField id="phoneNumber" name="phoneNumber" value="" class="input-large"
                                  autocomplete="off"/>
                 </div>
             </div>
