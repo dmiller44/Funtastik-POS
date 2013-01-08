@@ -8,6 +8,11 @@ class Customer {
 
     String bonusCardNumber = ""
 
+    String homePhone
+    String mobilePhone
+
+    Address address
+
     boolean teamMember = false
 
     static constraints = {
@@ -15,6 +20,9 @@ class Customer {
         lastName(nullable: false, blank: false)
         middleInitial(nullable: true, blank: true)
         bonusCardNumber(nullable: true, blank: true)
+        homePhone(nullable: true, blank: true)
+        mobilePhone(nullable: true, blank: true)
+        address(nullable: true)
         teamMember()
     }
 
