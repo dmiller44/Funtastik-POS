@@ -1,5 +1,6 @@
 package com.angrygiant.funtastik.pos.controller
 
+import com.angrygiant.funtastik.pos.domain.Customer
 import com.angrygiant.funtastik.pos.domain.InventoryItem
 import com.angrygiant.funtastik.pos.domain.PosLineItem
 import com.angrygiant.funtastik.pos.domain.PosPaymentEntry
@@ -8,6 +9,7 @@ import com.angrygiant.funtastik.pos.domain.Size
 import com.angrygiant.funtastik.pos.domain.transaction.PaymentMethods
 import com.angrygiant.funtastik.pos.domain.transaction.TransactionStatus
 import grails.converters.JSON
+import org.apache.commons.lang.StringUtils
 
 import java.sql.Timestamp
 
@@ -235,6 +237,44 @@ class CashRegisterController {
         paymentEntry.delete(flush: true);
 
         redirect(action: 'index', id: params.transactionId)
+    }
+
+    def addCustomerToTransaction() {
+        PosTransaction transaction = PosTransaction.get(params.transactionId)
+
+        Customer customer
+        if (StringUtils.isBlank(params.customerId)) {
+            log.info("Creating new customer for transaction..")
+            //create a new customer object
+            String[] pieces = params.customerName.toString().split(" ")
+
+            customer = new Customer()
+            customer.firstName = pieces[0]
+
+            if (pieces.size() > 0) {
+                customer.lastName = pieces[1]
+            }
+
+            customer.homePhone = params.phoneNumber.toString()
+
+            if (!customer.save(flush: true)) {
+                log.error("Could not save customer...")
+                customer.errors.allErrors.each {
+                    log.error(it.defaultMessage)
+                }
+                customer = null
+            }
+        } else {
+            log.info("Adding existing customer of id ${params.customerId}")
+            customer = Customer.get(params.customerId)
+        }
+
+        if (customer) {
+            transaction.customer = customer
+            transaction.save(flush: true)
+        }
+
+        redirect(action: 'index', id: transaction.id)
     }
 
     def ajaxGetSizes() {
