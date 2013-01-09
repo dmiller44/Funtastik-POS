@@ -464,9 +464,6 @@
                 });
             },
             updater: function (item) {
-//                alert(item);
-//                alert(customers[item].id);
-
                 var fullName = customers[item].firstName + " " + customers[item].lastName;
                 $("#customerId").val(customers[item].id);
 
