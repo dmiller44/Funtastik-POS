@@ -22,8 +22,16 @@
             </tr>
             <tr>
                 <td>Customer:</td>
-                <td><button type="button" class="btn btn-info"
-                            onclick="$('#addCustomerModal').modal('show');">Add Customer</button></td>
+                <td>
+                    <g:if test="${transaction.customer}">
+                        ${transaction.customer?.fullName}<br/><br/><button type="button" class="btn btn-info"
+                                                                           onclick="$('#addCustomerModal').modal('show');">Change Customer</button>
+                    </g:if>
+                    <g:else>
+                        <button type="button" class="btn btn-info"
+                                onclick="$('#addCustomerModal').modal('show');">Add Customer</button>
+                    </g:else>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -376,7 +384,7 @@
 
 <div id="addCustomerModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">?</button>
+        <button type="button" class="close" data-dismiss="modal">X</button>
 
         <h3 id="customerModalLabel">Add Customer to Transaction</h3>
     </div>
@@ -391,7 +399,7 @@
                 <label class="control-label" for="customerName">Customer Name</label>
 
                 <div class="controls">
-                    <g:textField id="customerName" name="customerName" value="" class="input-large"
+                    <g:textField id="customerName" name="customerName" class="input-large"
                                  autocomplete="off"/>&nbsp;&nbsp;&nbsp;<a href="#"
                                                                           onclick="$('#createNewFields').show('show');">Create New...</a>
                 </div>
@@ -406,8 +414,9 @@
                 </div>
             </div>
 
-            <div class="form-actions">
+            <div class="control-group" style="text-align: center;">
                 <button class="btn btn-primary">Save Changes</button>
+                <button onclick="$('#customerId').val('-1');" class="btn btn-warning">Clear Customer</button>
                 <a href="#" onclick="$('#addCustomerModal').modal('hide');" class="btn">Close</a>
             </div>
         </form>
@@ -423,6 +432,9 @@
 </script>
 
 <script type="text/javascript" language="javascript">
+    var customerList;
+    var customers;
+
     $(document).ready(function () {
         $("#queryItem").blur(function () {
             var skuCode = $('#queryItem').val();
@@ -441,11 +453,24 @@
         $("#customerName").typeahead({
             source: function (query, process) {
                 $.post('${createLink(action: "ajaxGetCustomers")}', { q: query, limit: 8 }, function (data) {
-                    process(data);
+                    customerList = [];
+                    customers = {};
+
+                    $.each(data, function (index, value) {
+                        customerList.push(value.firstName + " " + value.lastName);
+                        customers[value.firstName + " " + value.lastName] = value;
+                    });
+                    process(customerList);
                 });
             },
             updater: function (item) {
-                alert(item);
+//                alert(item);
+//                alert(customers[item].id);
+
+                var fullName = customers[item].firstName + " " + customers[item].lastName;
+                $("#customerId").val(customers[item].id);
+
+                return fullName;
             }
         });
     });

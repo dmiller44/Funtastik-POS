@@ -242,6 +242,14 @@ class CashRegisterController {
     def addCustomerToTransaction() {
         PosTransaction transaction = PosTransaction.get(params.transactionId)
 
+        if (params.customerId == "-1") {
+            transaction.customer = null;
+            transaction.save(flush: true);
+
+            redirect(action: 'index', id: transaction.id)
+            return
+        }
+
         Customer customer
         if (StringUtils.isBlank(params.customerId)) {
             log.info("Creating new customer for transaction..")
@@ -293,7 +301,8 @@ class CashRegisterController {
     }
 
     def ajaxGetCustomers() {
-        def list = ["Dan Miller", "Aaron Wilson", "Joan Wilson", "Zachary Miller", "Bridget Miller"]
+        log.warn("Searching for ${params.q}")
+        def list = Customer.findAllByFirstNameOrLastNameIlike(params.q, params.q)
 
         render list as JSON
     }
