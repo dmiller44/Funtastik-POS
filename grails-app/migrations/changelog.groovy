@@ -429,4 +429,6 @@ databaseChangeLog = {
     include file: 'teamMemberFieldOnCustomer.groovy'
 
     include file: 'additionOfAddressToCustomer.groovy'
+
+    include file: 'addPriceToLineItem.groovy'
 }

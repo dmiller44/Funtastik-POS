@@ -12,7 +12,7 @@ class CashRegisterService {
         double subtotal = 0
 
         for (PosLineItem lineItem : transaction.lineItems) {
-            subtotal += lineItem.item.retailPrice * lineItem.quantity
+            subtotal += lineItem.price * lineItem.quantity
         }
 
         if (transaction.transactionDiscount > 0) {
@@ -30,7 +30,7 @@ class CashRegisterService {
         double totalToTax = 0
         for (PosLineItem lineItem : transaction.lineItems) {
             if (lineItem.item.taxable) {
-                totalToTax += lineItem.item.retailPrice * lineItem.quantity
+                totalToTax += lineItem.price * lineItem.quantity
             }
         }
 

@@ -74,7 +74,7 @@
                         <td>${lineItem.item.skuCode}</td>
                         <td>${lineItem.item.name}</td>
                         <td>${lineItem.item.description}</td>
-                        <td onclick="showPriceModal('${lineItem.id}', '${lineItem.item.retailPrice}');">${formatNumber(number: lineItem.item.retailPrice, type: 'currency')}</td>
+                        <td onclick="showPriceModal('${lineItem.id}', '${lineItem.price}');">${formatNumber(number: lineItem.price, type: 'currency')}</td>
                         <td>${lineItem.size.name}</td>
                         <td onclick="showQuantityModal('${lineItem.id}', '${lineItem.quantity}');">${lineItem.quantity}</td>
                         <td>

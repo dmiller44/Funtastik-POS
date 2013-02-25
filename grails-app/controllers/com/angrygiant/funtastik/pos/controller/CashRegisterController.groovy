@@ -75,6 +75,21 @@ class CashRegisterController {
         redirect(action: 'index', id: params.transactionId)
     }
 
+    def editLineItemPrice() {
+        PosLineItem lineItem = PosLineItem.get(params.pricelineItemId)
+
+        if (!lineItem) {
+            log.error("Could not adjust price for line item...not found")
+            redirect(action: 'index', id: params.transactionId)
+            return
+        }
+
+        lineItem.price = Double.parseDouble(params.price)
+        lineItem.save(flush: true)
+
+        redirect(action: 'index', id: params.transactionId)
+    }
+
     def addItemToTransaction() {
         if (!params.queryItem || !params.id || !params.itemSize) {
             log.error("No sku, transaction id or item size specified - going back")
@@ -108,6 +123,7 @@ class CashRegisterController {
             lineItem.item = inventoryItem
             lineItem.size = size
             lineItem.quantity = 1
+            lineItem.price = inventoryItem.retailPrice
             lineItem.transaction = transaction
 
             lineItem.save(flush: true)
