@@ -55,7 +55,9 @@ class CashRegisterController {
             }
         }
 
-        render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax, totalDue: totalDue])
+        String lastSku = params.lastSku
+
+        render(view: 'transaction', model: [transaction: transaction, subtotal: subtotal, salesTax: salesTax, totalDue: totalDue, lastSku: lastSku])
     }
 
     def addQuantityToLineItem() {
@@ -115,7 +117,7 @@ class CashRegisterController {
         }
 
         //TODO set success flash message
-        redirect(action: 'index', id: params.id)
+        redirect(action: 'index', id: params.id, params: [lastSku: params.queryItem])
     }
 
     def removeItemFromTransaction() {

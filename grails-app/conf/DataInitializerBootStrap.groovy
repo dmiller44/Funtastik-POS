@@ -1,6 +1,8 @@
 import com.angrygiant.funtastik.pos.domain.Color
 import com.angrygiant.funtastik.pos.domain.Department
+import com.angrygiant.funtastik.pos.domain.InventoryItem
 import com.angrygiant.funtastik.pos.domain.ItemType
+import com.angrygiant.funtastik.pos.domain.Manufacturer
 import com.angrygiant.funtastik.pos.domain.Size
 import com.angrygiant.funtastik.security.Users
 import com.angrygiant.funtastik.security.Role
@@ -74,6 +76,45 @@ class DataInitializerBootStrap {
             }
 
             log.info("Done adding initial sizes")
+        }
+
+        //initialize a gift card item
+        if (!Manufacturer.findByName("Funtastik")) {
+            log.warn("No existing manufacturer of name 'Funtastik'...creating...")
+            new Manufacturer(name: 'Funtastik', phoneNumber: '717-697-6692', webSite: 'http://www.funtastikonline.net', preferredVendor: true).save(flush: true)
+        }
+
+        if (!Color.findByName("Not Applicable")) {
+            log.warn("No existing color of 'Not Applicable'...creating...")
+            new Color(name: 'Not Applicable').save(flush: true)
+        }
+
+        if (!ItemType.findByName("Gift Card")) {
+            log.warn("No existing item type of 'Gift Card'...creating...")
+            new ItemType(name: 'Gift Card', retired: false).save(flush: true)
+        }
+
+        if (!InventoryItem.findBySkuCode("GIFTCARD")) {
+            log.warn("Creating special 'GIFTCARD' item...")
+            InventoryItem item = new InventoryItem()
+            item.name = "Gift Card"
+            item.description = "Gift Card"
+            item.wholesalePrice = 0.0
+            item.retailPrice = 0.0
+            item.taxable = false
+            item.barcoded = false
+            item.skuCode = "GIFTCARD"
+            item.archived = false
+            item.itemType = ItemType.findByName("Gift Card")
+            item.manufacturer = Manufacturer.findByName("Funtastik")
+            item.color = Color.findByName("Not Applicable")
+
+            item.save(flush: true)
+        }
+
+        if (!Size.findByNameAndItemType("N/A", ItemType.findByName("Gift Card"))) {
+            log.warn("Creating special size for gift cards")
+            new Size(name: "N/A", itemType: ItemType.findByName("Gift Card")).save(flush: true)
         }
 
         //set up initial roles

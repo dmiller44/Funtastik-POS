@@ -470,5 +470,9 @@
                 return fullName;
             }
         });
+
+        <g:if test="${!transaction.customer && params.lastSku == 'GIFTCARD'}">
+        $('#addCustomerModal').modal('show');
+        </g:if>
     });
 </script>
