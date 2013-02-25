@@ -74,7 +74,7 @@
                         <td>${lineItem.item.skuCode}</td>
                         <td>${lineItem.item.name}</td>
                         <td>${lineItem.item.description}</td>
-                        <td>${formatNumber(number: lineItem.item.retailPrice, type: 'currency')}</td>
+                        <td onclick="showPriceModal('${lineItem.id}', '${lineItem.item.retailPrice}');">${formatNumber(number: lineItem.item.retailPrice, type: 'currency')}</td>
                         <td>${lineItem.size.name}</td>
                         <td onclick="showQuantityModal('${lineItem.id}', '${lineItem.quantity}');">${lineItem.quantity}</td>
                         <td>
@@ -382,6 +382,34 @@
     </div>
 </div>
 
+<div id="editLineItemPriceModal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">?</button>
+
+        <h3 id="myModalLabel6">Edit Price</h3>
+    </div>
+
+    <div class="modal-body">
+        <form id="inlineEditLineItemPrice" class="form-horizontal" action="${createLink(action: 'editLineItemPrice')}"
+              method="POST">
+            <g:hiddenField name="transactionId" value="${transaction.id}"/>
+            <g:hiddenField name="pricelineItemId" value="-1"/>
+            <div class="control-group">
+                <label class="control-label" for="price">Price</label>
+
+                <div class="controls">
+                    <g:textField id="price" name="price" value="-1"/>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary">Save Changes</button>
+                <a href="#" onclick="$('#editLineItemPriceModal').modal('hide');" class="btn">Close</a>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div id="addCustomerModal" class="modal hide fade" tabindex="-1" role="dialog">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">X</button>
@@ -428,6 +456,14 @@
         $('#lineItemId').val(lineItemId);
         $('#quantity').val(quantity);
         $('#editQohModal').modal('show');
+    }
+</script>
+
+<script type="text/javascript">
+    function showPriceModal(lineItemId, price) {
+        $('#pricelineItemId').val(lineItemId);
+        $('#price').val(price);
+        $('#editLineItemPriceModal').modal('show');
     }
 </script>
 
